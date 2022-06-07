@@ -1,3 +1,2 @@
 <?php
-echo "PHP MVC E-Commerce Website";
-
+require_once __DIR__ . "/../app/bootstrap/app.php";
