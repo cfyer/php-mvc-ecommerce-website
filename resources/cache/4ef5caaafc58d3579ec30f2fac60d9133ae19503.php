@@ -9,10 +9,5 @@
 <body>
     <h1>Home Page Here ...</h1>
     <hr>
-    <form action="/form/" method="post">
-        <input type="hidden" name="csrf" value="<?php echo e(\App\Core\CSRFToken::_token()); ?>">
-        <input type="text" name="username">
-        <input type="submit" value="Go">
-    </form>
 </body>
 </html>
