@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Core\CSRFToken;
 use App\Core\Mail;
+use App\Core\Request;
+use App\Core\RequestValidation;
 use App\Core\View;
 
 class HomeController extends Controller
@@ -21,5 +23,21 @@ class HomeController extends Controller
             'subject' => 'welcome'
         ]);
         var_dump($result);
+    }
+
+    public function form()
+    {
+        $request = Request::get('post');
+
+        if (!CSRFToken::verify($request->csrf, false))
+            die('<center>Invalid request</center>');
+
+        $result = RequestValidation::validate($request, [
+            'name' => ['required' => true, 'unique' => 'categories'],
+            'email' => ['required' => true, 'email' => true],
+        ]);
+        if (!$result) {
+            RequestValidation::sendErrorsAndRedirect('/');
+        }
     }
 }
