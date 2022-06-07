@@ -24,20 +24,4 @@ class HomeController extends Controller
         ]);
         var_dump($result);
     }
-
-    public function form()
-    {
-        $request = Request::get('post');
-
-        if (!CSRFToken::verify($request->csrf, false))
-            die('<center>Invalid request</center>');
-
-        $result = RequestValidation::validate($request, [
-            'name' => ['required' => true, 'unique' => 'categories'],
-            'email' => ['required' => true, 'email' => true],
-        ]);
-        if (!$result) {
-            RequestValidation::sendErrorsAndRedirect('/');
-        }
-    }
 }

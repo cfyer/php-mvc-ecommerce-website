@@ -14,8 +14,9 @@ class RouteHandler
     {
         $this->match = $altoRouter->match();
 
-        if (!$this->match)
-            die('404');
+        if (!$this->match) {
+            return View::blade('errors.404');
+        }
 
         $this->getTarget();
 
