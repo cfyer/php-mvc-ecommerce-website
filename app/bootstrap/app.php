@@ -1,10 +1,9 @@
 <?php
+session_start();
 
 use App\Core\Database;
 use App\Core\ErrorHandler;
 use App\Core\RouteHandler;
-
-session_start();
 
 define('BASE_PATH', realpath(__DIR__ . '/../../'));
 

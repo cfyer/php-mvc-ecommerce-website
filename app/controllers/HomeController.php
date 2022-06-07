@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\CSRFToken;
 use App\Core\Mail;
 use App\Core\View;
 

@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Home Page Here ...</h1>
+    <hr>
 </body>
 </html>
