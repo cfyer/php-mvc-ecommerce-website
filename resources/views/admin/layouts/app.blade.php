@@ -28,7 +28,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/admin">
                                 <i class="icofont icofont-speed-meter"></i>
                                 Dashboard
                             </a>
@@ -51,15 +51,11 @@
                                 Orders
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/categories">
                                 <i class="icofont icofont-slack"></i>
                                 Categories
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="#">Show All</a>
-                                <a class="dropdown-item" href="#">Action 2</a>
-                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown">
@@ -68,7 +64,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="#">Show All</a>
-                                <a class="dropdown-item" href="#">Add New</a>
+                                <a class="dropdown-item" href="#">New</a>
                             </div>
                         </li>
                     </ul>

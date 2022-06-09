@@ -1,4 +1,4 @@
-<?php $__env->startSection('title' . 'Dashboard'); ?>
+<?php $__env->startSection('title' , 'Dashboard'); ?>
 
 <?php $__env->startSection('content'); ?>
     <h1 class="text-center mt-2">Dashboard</h1>
