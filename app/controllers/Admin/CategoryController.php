@@ -13,10 +13,17 @@ use App\Utilities\Redirect;
 
 class CategoryController extends Controller
 {
+    protected $count = null;
+
+    public function __construct()
+    {
+        $this->count = Category::all()->count();
+    }
+
     public function index()
     {
-        $categories = Category::orderBy('id', 'DESC')->get();
-        return View::blade('admin.categories.index', compact('categories'));
+        list($categories, $links) = paginate(10, $this->count, 'categories');
+        return View::blade('admin.categories.index', compact('categories','links'));
     }
 
     public function store()
