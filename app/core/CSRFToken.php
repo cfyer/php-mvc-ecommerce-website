@@ -17,7 +17,7 @@ class CSRFToken
     public static function verify($requet_token, $regenerate = true)
     {
         if (!Session::has('token') or Session::get('token') !== $requet_token)
-            return false;
+            return throw new \Exception("CSRF token is not valid");;
 
         if ($regenerate)
             Session::remove('token');

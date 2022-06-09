@@ -91,12 +91,13 @@ class RequestValidation
 
     protected static function unique($field, $value, $policy)
     {
-        return DB::table($policy)->where($field, '!=', $value)->exists();
+        return !DB::table($policy)->where($field, $value)->exists();
     }
 
     public static function sendErrorsAndRedirect($page)
     {
         Session::add('invalids', self::$invalids);
         Redirect::to($page);
+        exit();
     }
 }

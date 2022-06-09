@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title' . 'Dashboard')
+@section('title' , 'Dashboard')
 
 @section('content')
     <h1 class="text-center mt-2">Dashboard</h1>
