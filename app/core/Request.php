@@ -14,8 +14,7 @@ class Request
         if (count($_GET) > 0)
             $request['get'] = $_GET;
 
-        if (count($_FILES) > 0)
-            $request['file'] = $_FILES;
+        $request['file'] = $_FILES;
 
         return json_decode(json_encode($request));
     }

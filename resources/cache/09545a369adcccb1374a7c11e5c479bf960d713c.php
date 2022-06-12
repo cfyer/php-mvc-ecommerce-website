@@ -63,8 +63,8 @@
                                 Products
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="#">Show All</a>
-                                <a class="dropdown-item" href="#">New</a>
+                                <a class="dropdown-item" href="/admin/products/">Show All</a>
+                                <a class="dropdown-item" href="/admin/products/create/">New</a>
                             </div>
                         </li>
                     </ul>
