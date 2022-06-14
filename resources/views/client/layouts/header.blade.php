@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <button class="btn btn-primary me-lg-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar">
+        <button class="btn btn-primary me-lg-2" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="icofont icofont-cart"></span>
         </button>
         <a class="navbar-brand" href="/">{{ $_ENV['APP_NAME'] }}</a>
@@ -18,17 +18,15 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Products</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item my-1" href="#">
+                        @foreach (\App\Models\Category::all() as $category)
+                            <a class="dropdown-item my-1" href="/categories/{{ $category->id }}/">
+                                <i class="icofont icofont-caret-right"></i>
+                                {{ $category->name }}
+                            </a>
+                        @endforeach
+                        <a class="dropdown-item my-1" href="/products/">
                             <i class="icofont icofont-caret-right"></i>
-                            Category 1
-                        </a>
-                        <a class="dropdown-item my-1" href="#">
-                            <i class="icofont icofont-caret-right"></i>
-                            Category 1
-                        </a>
-                        <a class="dropdown-item my-1" href="#">
-                            <i class="icofont icofont-caret-right"></i>
-                            Category 1
+                            All Products
                         </a>
                     </div>
                 </li>

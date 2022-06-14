@@ -8,7 +8,8 @@
             <div class="col-12">
                 <nav class="breadcrumb">
                     <a class="breadcrumb-item" href="/">Home</a>
-                    <a class="breadcrumb-item" href="#">Products</a>
+                    <a class="breadcrumb-item" href="/products/">Products</a>
+                    <a class="breadcrumb-item" href="/categories/{{$product->category->id}}/">{{$product->category->name}}</a>
                     <span class="breadcrumb-item active" aria-current="page">{{ $product->name }}</span>
                 </nav>
             </div>

@@ -40,7 +40,6 @@ class CategoryController extends Controller
 
         Category::create([
             'name' => $request->name,
-            'slug' => str_replace(' ', '-', $request->name)
         ]);
 
         Session::add('message', 'Category created successfuly');
@@ -67,7 +66,6 @@ class CategoryController extends Controller
         $category = Category::where('id', $id)->first();
         $category->update([
             'name' => $request->name,
-            'slug' => str_replace(' ', '-', $request->name)
         ]);
 
         Session::add('message', 'Category updated successfuly');

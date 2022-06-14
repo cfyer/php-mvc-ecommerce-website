@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $products = Product::orderBy('id', 'DESC')->limit(8)->get();
+        $products = Product::orderBy('id', 'DESC')->limit(4)->get();
         $slides = Slider::orderBy('id', 'DESC')->limit(3)->get();
         return View::blade('client.index', compact('products', 'slides'));
     }

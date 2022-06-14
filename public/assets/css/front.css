@@ -1,3 +1,28 @@
 a{
     text-decoration: none;
 }
+
+.pagination{
+    text-align: center !important;
+}
+
+.pagination li{
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    background-color: aqua;
+    margin-left: 6px;
+    border-radius: 4px;
+    min-width: 36px;
+}
+
+.pagination li a{
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.pagination .active{
+    background-color: rgb(55, 0, 255);
+    color: white;
+    font-weight: 600;
+}

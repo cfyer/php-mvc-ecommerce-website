@@ -5,8 +5,10 @@
  */
 $router->map('GET', '/', 'HomeController@index', 'home');
 
-# products
 $router->map('GET', '/products/[i:id][/]?', 'ProductController@show', 'products.show');
+$router->map('GET', '/products[/]?', 'ProductController@index', 'products.index');
+
+$router->map('GET', '/categories/[i:id][/]?', 'CategoryController@show', 'categories.show');
 
 /**
  * ===== Adming Panel Routes =====

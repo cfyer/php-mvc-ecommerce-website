@@ -15,10 +15,16 @@ class ProductController extends Controller
         $this->count = Product::all()->count();
     }
 
+    public function index()
+    {
+        list($products, $links) = paginate(8, $this->count, 'products');
+        return View::blade('client.products.index', compact('products', 'links'));
+    }
+
     public function show($id)
     {
         $product = Product::where('id', $id)->first();
-        $similarProducts = Product::query()->where('category_id', $product->category->id)->orderBy('id','DESC')->limit(4)->get();
+        $similarProducts = Product::query()->where('category_id', $product->category->id)->orderBy('id', 'DESC')->limit(4)->get();
         return View::blade('client.products.show', compact('product', 'similarProducts'));
-    } 
+    }
 }

@@ -6,7 +6,7 @@
                 <ul class="mt-2">
                     @foreach (\App\Models\Product::footerProducts()->get() as $product)
                         <li>
-                            <a href="#" class="text-black">{{ $product->name }}</a>
+                            <a href="/products/{{$product->id}}/" class="text-black">{{ $product->name }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -18,10 +18,10 @@
                         <a href="#" class="text-black">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="text-black">Register</a>
+                        <a href="#" class="text-black">Register</a> / <a href="#" class="text-black">Login</a>
                     </li>
                     <li>
-                        <a href="#" class="text-black">Login</a>
+                        <a href="/products/" class="text-black">Products</a>
                     </li>
                     <li>
                         <a href="#" class="text-black">Github Repository</a>
