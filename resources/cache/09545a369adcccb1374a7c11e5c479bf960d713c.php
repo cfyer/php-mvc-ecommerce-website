@@ -67,6 +67,16 @@
                                 <a class="dropdown-item" href="/admin/products/create/">New</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown">
+                                <i class="icofont icofont-picture"></i>
+                                Slider
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="/admin/slider/">Show All</a>
+                                <a class="dropdown-item" href="/admin/slider/create/">New Slide</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

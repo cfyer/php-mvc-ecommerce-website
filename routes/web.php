@@ -1,12 +1,15 @@
 <?php
 
 /**
- * Client Rotues
+ * ===== Client Rotues =====
  */
 $router->map('GET', '/', 'HomeController@index', 'home');
 
+# products
+$router->map('GET', '/products/[i:id][/]?', 'ProductController@show', 'products.show');
+
 /**
- * Adming Panel Routes
+ * ===== Adming Panel Routes =====
  */
 $router->map('GET', '/admin[/]?', 'Admin\DashboardController@index', 'dashboard');
 
@@ -24,3 +27,10 @@ $router->map('POST', '/admin/products/store/', 'Admin\ProductController@store', 
 $router->map('GET', '/admin/products/[i:id]/edit/', 'Admin\ProductController@edit', 'products.edit');
 $router->map('POST', '/admin/products/[i:id]/update/', 'Admin\ProductController@update', 'products.update');
 $router->map('POST', '/admin/products/[i:id]/delete/', 'Admin\ProductController@delete', 'products.delete');
+
+# sldier
+$router->map('GET', '/admin/slider[/]?', 'Admin\SliderController@index', 'slider');
+$router->map('GET', '/admin/slider/create[/]?', 'Admin\SliderController@create', 'slider.create');
+$router->map('POST', '/admin/slider/store/', 'Admin\SliderController@store', 'slider.store');
+$router->map('POST', '/admin/slider/[i:id]/delete/', 'Admin\SliderController@delete', 'slider.delete');
+$router->map('GET', '/admin/slider/[i:id]/active/', 'Admin\SliderController@activeSwitch', 'slider.active');

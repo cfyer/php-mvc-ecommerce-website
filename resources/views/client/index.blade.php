@@ -3,8 +3,13 @@
 @section('title', 'Home')
 
 @section('content')
-    <div class="container">
-        <h1>Home Page Here ...</h1>
+    @include('client.layouts.slider')
+
+    <div class="container-fluid my-4">
+        <div class="row">
+            @foreach ($products as $product)
+                @include('client.layouts.single_product')
+            @endforeach
+        </div>
     </div>
-    <hr>
 @endsection

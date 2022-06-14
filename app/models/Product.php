@@ -16,4 +16,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function scopeFooterProducts($query)
+    {
+        $query->orderBy('id','DESC')->limit(4);
+    }
 }

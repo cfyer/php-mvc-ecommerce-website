@@ -14,3 +14,11 @@ function paginate($num_of_records, $total_count, $table)
         $pages->page_links()
     ];
 }
+
+
+function dump($data)
+{
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+}
