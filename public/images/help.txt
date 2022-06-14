@@ -1,1 +1,0 @@
-in this directory create 'products' and 'slides' folder for upload products and slider images
