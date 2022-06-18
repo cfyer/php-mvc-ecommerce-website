@@ -10,6 +10,13 @@ $router->map('GET', '/products[/]?', 'ProductController@index', 'products.index'
 
 $router->map('GET', '/categories/[i:id][/]?', 'CategoryController@show', 'categories.show');
 
+$router->map('GET', '/cart', 'CartController@show', 'cart.show');
+$router->map('POST', '/cart/add/', 'CartController@addItem', 'cart.add');
+$router->map('POST', '/cart/quantity/inc/', 'CartController@incQty', 'cart.quantity.inc');
+$router->map('POST', '/cart/quantity/dec/', 'CartController@decQty', 'cart.quantity.dec');
+$router->map('POST', '/cart/remove/item/', 'CartController@removeItem', 'cart.remove.item');
+$router->map('POST', '/cart/remove/all/', 'CartController@removeAll', 'cart.remove.all');
+
 /**
  * ===== Adming Panel Routes =====
  */

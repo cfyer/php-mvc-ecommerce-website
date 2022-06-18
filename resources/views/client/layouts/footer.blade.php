@@ -15,7 +15,7 @@
                 <strong>Useful links</strong>
                 <ul class="mt-2">
                     <li>
-                        <a href="#" class="text-black">Home</a>
+                        <a href="/" class="text-black">Home</a>
                     </li>
                     <li>
                         <a href="#" class="text-black">Register</a> / <a href="#" class="text-black">Login</a>
