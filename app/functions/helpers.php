@@ -1,5 +1,7 @@
 <?php
 
+use App\Core\Session;
+use App\Models\User;
 use Illuminate\Database\Capsule\Manager as DB;
 use voku\helper\Paginator;
 
@@ -21,4 +23,17 @@ function dump($data)
     echo "<pre>";
     var_dump($data);
     echo "</pre>";
+}
+
+function is_auth()
+{
+    return Session::has('SESSION_USER_NAME') ? true : false;
+}
+
+function user()
+{
+    if (is_auth()) {
+        return User::where('id', Session::get('SESSION_USER_ID'))->first();
+    }
+    return false;
 }
