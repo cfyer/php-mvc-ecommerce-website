@@ -9,7 +9,10 @@
         </div>
         <div class="card-footer d-flex">
             <a href="/products/{{ $product->id }}" class="btn btn-primary btn-sm">See More</a>
-            <a href="#" class="btn btn-success btn-sm mx-2">Add to Cart</a>
+            <button class="btn btn-success btn-sm mx-2 addCart" data-productId="{{ $product->id }}">
+                Add to Cart
+            </button>
+            <input type="hidden" name="quantity" id="quantity" value="1">
         </div>
     </div>
 </div>

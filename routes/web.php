@@ -5,13 +5,30 @@
  */
 $router->map('GET', '/', 'HomeController@index', 'home');
 
+# products
 $router->map('GET', '/products/[i:id][/]?', 'ProductController@show', 'products.show');
 $router->map('GET', '/products[/]?', 'ProductController@index', 'products.index');
 
+# categories
 $router->map('GET', '/categories/[i:id][/]?', 'CategoryController@show', 'categories.show');
 
+# cart
+$router->map('GET', '/cart[/]?', 'CartController@show', 'cart.show');
+$router->map('POST', '/cart/add/', 'CartController@addItem', 'cart.add');
+$router->map('POST', '/cart/quantity/inc/', 'CartController@incQty', 'cart.quantity.inc');
+$router->map('POST', '/cart/quantity/dec/', 'CartController@decQty', 'cart.quantity.dec');
+$router->map('POST', '/cart/remove/item/', 'CartController@removeItem', 'cart.remove.item');
+$router->map('POST', '/cart/remove/all/', 'CartController@removeAll', 'cart.remove.all');
+
+# auth
+$router->map('GET', '/register[/]?', 'AuthController@register', 'auth.register');
+$router->map('POST', '/register/', 'AuthController@registerOperate', 'auth.register.operate');
+$router->map('GET', '/login[/]?', 'AuthController@login', 'auth.login');
+$router->map('POST', '/login/', 'AuthController@loginOperate', 'auth.login.operate');
+$router->map('POST', '/logout/', 'AuthController@logout', 'auth.logout');
+
 /**
- * ===== Adming Panel Routes =====
+ * ======= Adming Panel Routes =======
  */
 $router->map('GET', '/admin[/]?', 'Admin\DashboardController@index', 'dashboard');
 
