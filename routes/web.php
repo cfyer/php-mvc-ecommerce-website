@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ===== Client Rotues =====
+ * ======= Client Rotues =======
  */
-$router->map('GET', '/', 'HomeController@index', 'home');
+$router->map('GET', '[/]?', 'HomeController@index', 'home');
 
 # products
 $router->map('GET', '/products/[i:id][/]?', 'ProductController@show', 'products.show');
@@ -26,6 +26,10 @@ $router->map('POST', '/register/', 'AuthController@registerOperate', 'auth.regis
 $router->map('GET', '/login[/]?', 'AuthController@login', 'auth.login');
 $router->map('POST', '/login/', 'AuthController@loginOperate', 'auth.login.operate');
 $router->map('POST', '/logout/', 'AuthController@logout', 'auth.logout');
+
+# payment
+$router->map('POST', '/payment/pay/', 'Payment\PaymentController@pay', 'payment.pay');
+$router->map('POST', '/payment/callback/', 'Payment\PaymentController@callback', 'payment.callback');
 
 /**
  * ======= Adming Panel Routes =======
