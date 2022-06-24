@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\CSRFToken;
+use App\Core\Request;
 use App\Core\View;
 use App\Models\Product;
 
@@ -18,6 +19,12 @@ class ProductController extends Controller
     public function index()
     {
         list($products, $links) = paginate(8, $this->count, 'products');
+
+        if (Request::has('get')) {
+            $request = Request::get('get');
+            $products = Product::where('name', 'LIKE', '%' . $request->key . '%')->get();
+        }
+
         return View::blade('client.products.index', compact('products', 'links'));
     }
 

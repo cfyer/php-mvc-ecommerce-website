@@ -19,7 +19,6 @@
             <thead>
                 <tr>
                     <th>name</th>
-                    <th>slug</th>
                     <th>operation</th>
                 </tr>
             </thead>
@@ -27,7 +26,6 @@
                 @foreach ($categories as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
-                        <td>{{ $category->slug }}</td>
                         <td class="d-flex">
                             <a href="/admin/categories/{{ $category->id }}/edit/" class="btn btn-info btn-sm mx-1">edit</a>
                             <form action="/admin/categories/{{ $category->id }}/delete/" method="post">

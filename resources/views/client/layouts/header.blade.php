@@ -52,8 +52,8 @@
                 @endif
             </ul>
 
-            <form class="d-flex my-2 my-lg-0">
-                <input class="form-control rounded-0" type="text" placeholder="Search">
+            <form class="d-flex my-2 my-lg-0" action="/products" method="GET">
+                <input name="key" class="form-control rounded-0" type="text" placeholder="Search">
                 <button class="btn btn-success rounded-0" type="submit">
                     <i class="icofont icofont-search-2"></i>
                 </button>

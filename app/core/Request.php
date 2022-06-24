@@ -4,7 +4,7 @@ namespace App\Core;
 
 class Request
 {
-    public static function all()
+    public static function all($is_array = false)
     {
         $request = [];
 
@@ -16,7 +16,7 @@ class Request
 
         $request['file'] = $_FILES;
 
-        return json_decode(json_encode($request));
+        return json_decode(json_encode($request), $is_array);
     }
 
     public static function get($key)
@@ -27,7 +27,7 @@ class Request
 
     public static function has($key)
     {
-        if (array_key_exists($key, self::all()))
+        if (array_key_exists($key, self::all(true)))
             return true;
 
         return false;
