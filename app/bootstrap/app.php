@@ -18,3 +18,4 @@ new Database;
 $router = new AltoRouter();
 require_once BASE_PATH . "/routes/web.php";
 new RouteHandler($router);
+

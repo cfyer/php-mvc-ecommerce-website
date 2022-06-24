@@ -12,7 +12,8 @@
         "illuminate/database": "^5.2",
         "phpmailer/phpmailer": "^6.6",
         "rakit/validation": "^1.4",
-        "voku/pagination": "^4.0"
+        "voku/pagination": "^4.0",
+        "stripe/stripe-php": "^8.7"
     },
     "require-dev": {
         "filp/whoops": "^2.14"

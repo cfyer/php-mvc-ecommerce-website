@@ -6,6 +6,7 @@
     <div class="container my-4">
         <h5>Cart Items</h5>
         <div class="row">
+            @include('client.layouts.messages')
             <table class="table table-responsive table-hover">
                 <thead>
                     <tr>
@@ -52,10 +53,13 @@
             </table>
             <section>
                 <strong>Amount : ${{ \App\Core\Cart::getTotalAmount() }}</strong>
-                <a href="#" class="btn btn-success btn-sm float-end">
-                    <i class="icofont icofont-basket"></i>
-                    Continue Shopping
-                </a>
+
+                <form action="/payment/pay/" method="post">
+                    <button class="btn btn-success btn-sm float-end" type="submit">
+                        <i class="icofont icofont-basket"></i>
+                        Continue Shopping
+                    </button>
+                </form>
                 <button id="removeAll" class="btn btn-danger btn-sm float-end mx-2">
                     <i class="icofont icofont-trash"></i>
                     Clear
