@@ -9,11 +9,17 @@ use App\Core\Request;
 use App\Core\RequestValidation;
 use App\Core\Session;
 use App\Core\View;
+use App\Middlewares\Role;
 use App\Models\Slider;
 use App\Utilities\Redirect;
 
 class SliderController extends Controller
 {
+    public function __construct()
+    {
+        Role::admin();
+    }
+
     public function index()
     {
         $slides = Slider::all();

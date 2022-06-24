@@ -8,6 +8,7 @@ use App\Core\Request;
 use App\Core\RequestValidation;
 use App\Core\Session;
 use App\Core\View;
+use App\Middlewares\Role;
 use App\Models\Category;
 use App\Utilities\Redirect;
 
@@ -17,6 +18,7 @@ class CategoryController extends Controller
 
     public function __construct()
     {
+        Role::admin();
         $this->count = Category::all()->count();
     }
 
