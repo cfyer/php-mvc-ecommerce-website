@@ -102,10 +102,9 @@ class AuthController
 
             if (Session::has('cart')) {
                 session_destroy();
-                session_regenerate_id(true);
             }
         }
 
-        return Redirect::to('/');
+        return Redirect::to('/login');
     }
 }

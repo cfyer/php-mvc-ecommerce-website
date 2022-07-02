@@ -9,7 +9,8 @@
                 <nav class="breadcrumb">
                     <a class="breadcrumb-item" href="/">Home</a>
                     <a class="breadcrumb-item" href="/products/">Products</a>
-                    <a class="breadcrumb-item" href="/categories/{{$product->category->id}}/">{{$product->category->name}}</a>
+                    <a class="breadcrumb-item"
+                        href="/categories/{{ $product->category->id }}/">{{ $product->category->name }}</a>
                     <span class="breadcrumb-item active" aria-current="page">{{ $product->name }}</span>
                 </nav>
             </div>
@@ -23,7 +24,9 @@
                 <div>{!! $product->description !!}</div>
                 <div class="mt-3">
                     <strong>${{ $product->price }}</strong>
-                    <button class="btn btn-success mx-2 btn-sm">Add to cart</button>
+                    <button class="addCart btn btn-success mx-2 btn-sm" data-productId="{{ $product->id }}">Add to
+                        cart</button>
+                    <input type="hidden" name="quantity" id="quantity" value="1">
                 </div>
             </div>
         </div>
