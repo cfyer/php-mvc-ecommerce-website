@@ -1,12 +1,12 @@
-a{
+a {
     text-decoration: none;
 }
 
-.pagination{
+.pagination {
     text-align: center !important;
 }
 
-.pagination li{
+.pagination li {
     padding-left: 12px;
     padding-right: 12px;
     padding-bottom: 8px;
@@ -16,13 +16,17 @@ a{
     min-width: 36px;
 }
 
-.pagination li a{
+.pagination li a {
     text-decoration: none;
     font-weight: 600;
 }
 
-.pagination .active{
+.pagination .active {
     background-color: rgb(55, 0, 255);
     color: white;
     font-weight: 600;
+}
+
+.slide{
+    max-height: 40vh;
 }

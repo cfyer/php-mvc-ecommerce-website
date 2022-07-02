@@ -18,6 +18,7 @@
                     <input type="password" name="password" class="form-control mb-3">
 
                     <input type="submit" value="Login" class="btn btn-primary btn-sm">
+                    <span class="ms-3">Don`t have account? <a href="/register">Register Here</a></span>
                 </form>
             </div>
         </div>

@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">{{ $_ENV['APP_NAME'] }}</a>
+            <a class="navbar-brand" href="/" target="_blank">{{ $_ENV['APP_NAME'] }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/admin/users">
                                 <i class="icofont icofont-users"></i>
                                 Users
                             </a>

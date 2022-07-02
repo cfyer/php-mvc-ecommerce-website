@@ -4,15 +4,14 @@
             <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel1">
                 <div class="carousel-inner rounded box-shadow">
                     @foreach ($slides as $slide)
-                        <div class="carousel-item
-                        @if ($slide->is_active == 1)
-                            active
-                        @endif
-                        ">
-                            <a href="#"><img src="/{{ $slide->image_path }}" class="d-block w-100" alt="..."></a>
+                        <div
+                            class="carousel-item card-picture
+                        @if ($slide->is_active == 1) active @endif ">
+                            <a href="{{ $slide->link }}">
+                                <img src="/{{ $slide->image_path }}" class="d-block w-100 slide" alt="...">
+                            </a>
                         </div>
                     @endforeach
-
                 </div>
                 <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
