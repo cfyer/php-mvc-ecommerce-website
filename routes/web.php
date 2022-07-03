@@ -57,3 +57,9 @@ $router->map('GET', '/admin/slider/create[/]?', 'Admin\SliderController@create',
 $router->map('POST', '/admin/slider/store/', 'Admin\SliderController@store', 'slider.store');
 $router->map('POST', '/admin/slider/[i:id]/delete/', 'Admin\SliderController@delete', 'slider.delete');
 $router->map('GET', '/admin/slider/[i:id]/active/', 'Admin\SliderController@activeSwitch', 'slider.active');
+
+# users 
+$router->map('GET', '/admin/users[/]?', 'Admin\UserController@index', 'user');
+$router->map('GET', '/admin/users/[i:id]/edit[/]?', 'Admin\UserController@edit', 'user.edit');
+$router->map('POST', '/admin/users/[i:id]/update/', 'Admin\UserController@update', 'user.update');
+$router->map('POST', '/admin/users/[i:id]/delete/', 'Admin\UserController@delete', 'user.delete');

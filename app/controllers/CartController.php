@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Request;
 use App\Core\Session;
 use App\Core\View;
+use App\Models\Product;
 
 class CartController
 {
@@ -32,6 +33,10 @@ class CartController
     public function incQty()
     {
         $id = Request::get('post')->id;
+        $product = Product::where('id', $id)->first();
+        if ($product['quantity'] <= $_SESSION['cart'][$id]['quantity']) {
+            exit();
+        }
         $_SESSION['cart'][$id]['quantity']++;
         return true;
     }
