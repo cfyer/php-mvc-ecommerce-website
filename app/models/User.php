@@ -11,4 +11,9 @@ class User extends Model
     public $timestamps = true;
     protected $dates = ['deleted_at'];
     protected $fillable = ['username', 'fullname', 'email', 'password', 'address', 'role'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

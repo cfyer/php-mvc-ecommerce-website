@@ -14,7 +14,7 @@
                             <i class="icofont icofont-slack"></i>
                             Categories
                         </h4>
-                        <h5 class="card-text">8</h5>
+                        <h5 class="card-text">{{ \App\Models\Category::count() }}</h5>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             <i class="icofont icofont-food-basket"></i>
                             Products
                         </h4>
-                        <h5 class="card-text">80</h5>
+                        <h5 class="card-text">{{ \App\Models\Product::count() }}</h5>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                             <i class="icofont icofont-users"></i>
                             Users
                         </h4>
-                        <h5 class="card-text">34</h5>
+                        <h5 class="card-text">{{ \App\Models\User::count() }}</h5>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                             <i class="icofont icofont-basket"></i>
                             Orders
                         </h4>
-                        <h5 class="card-text">8</h5>
+                        <h5 class="card-text">{{ \App\Models\Order::count() }}</h5>
                     </div>
                 </div>
             </div>
