@@ -40,13 +40,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/admin/payments">
                                 <i class="icofont icofont-money-bag"></i>
                                 Payments
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/admin/orders">
                                 <i class="icofont icofont-basket"></i>
                                 Orders
                             </a>
