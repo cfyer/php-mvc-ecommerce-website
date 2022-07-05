@@ -59,9 +59,9 @@
                                                     <tbody>
                                                         @foreach ($order->orderItems as $item)
                                                             <tr>
-                                                                <td>{{$item->product->name}}</td>
-                                                                <td>{{$item->quantity}}</td>
-                                                                <td>{{$item->total_price}}</td>
+                                                                <td>{{ $item->product->name }}</td>
+                                                                <td>{{ $item->quantity }}</td>
+                                                                <td>{{ $item->total_price }}</td>
                                                             </tr>
                                                         @endforeach
 

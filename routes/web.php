@@ -32,7 +32,7 @@ $router->map('POST', '/payment/pay/', 'Payment\PaymentController@pay');
 $router->map('POST', '/payment/callback/', 'Payment\PaymentController@callback');
 
 /**
- * ========== Adming Panel Routes ==========
+ * ========== Admin Panel Routes ==========
  */
 $router->map('GET', '/admin[/]?', 'Admin\DashboardController@index');
 
@@ -69,3 +69,17 @@ $router->map('GET', '/admin/payments[/]?', 'Admin\PaymentController@index');
 
 # orders
 $router->map('GET', '/admin/orders[/]?', 'Admin\OrderController@index');
+
+/**
+ * ========== User Panel Routes ==========
+ */
+$router->map('GET', '/panel[/]?', 'User\PanelController@index');
+
+# edit profile
+$router->map('GET', '/panel/[i:id]/edit', 'User\PanelController@edit');
+$router->map('POST', '/panel/[i:id]/update', 'User\PanelController@update');
+$router->map('GET', '/panel/[i:id]/edit/password', 'User\PanelController@editPassword');
+$router->map('POST', '/panel/[i:id]/update/password', 'User\PanelController@updatePassword');
+
+# user orders
+$router->map('GET', '/panel/[i:id]/orders', 'User\PanelController@orders');

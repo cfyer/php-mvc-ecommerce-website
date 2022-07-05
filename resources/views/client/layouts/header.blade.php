@@ -43,7 +43,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Account</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="#">Panel</a>
+                            <a class="dropdown-item" href="/panel">Panel</a>
                             <form action="logout/" method="POST">
                                 <input type="submit" value="logout" class="dropdown-item">
                             </form>
