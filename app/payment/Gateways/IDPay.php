@@ -24,7 +24,7 @@ class IDPay implements PayContract, VerifyContract
             'amount' => $this->request->getAmount(),
             'name' => $this->request->getUser()->fullname,
             'mail' => $this->request->getUser()->email,
-            'callback' => 'http://weshop.php/payment/callback/',
+            'callback' => "{$_ENV['APP_URL']}payment/callback/",
         );
 
         $ch = curl_init();
@@ -67,6 +67,7 @@ class IDPay implements PayContract, VerifyContract
         ));
 
         $result = curl_exec($ch);
+
         curl_close($ch);
 
         $result = json_decode($result, true);

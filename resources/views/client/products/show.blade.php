@@ -24,8 +24,15 @@
                 <div>{!! $product->description !!}</div>
                 <div class="mt-3">
                     <strong>${{ $product->price }}</strong>
-                    <button class="addCart btn btn-success mx-2 btn-sm" data-productId="{{ $product->id }}">Add to
-                        cart</button>
+                    @if ($product->quantity > 0)
+                    <button class="btn btn-success btn-sm mx-2 addCart" data-productId="{{ $product->id }}">
+                        Add to Cart
+                    </button>
+                    @else
+                    <button class="btn btn-danger btn-sm mx-2 addCart" disabled>
+                        Ended
+                    </button>
+                    @endif
                     <input type="hidden" name="quantity" id="quantity" value="1">
                 </div>
             </div>
