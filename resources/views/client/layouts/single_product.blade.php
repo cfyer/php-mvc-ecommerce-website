@@ -9,9 +9,15 @@
         </div>
         <div class="card-footer d-flex">
             <a href="/products/{{ $product->id }}" class="btn btn-primary btn-sm">See More</a>
+            @if ($product->quantity > 0)
             <button class="btn btn-success btn-sm mx-2 addCart" data-productId="{{ $product->id }}">
                 Add to Cart
             </button>
+            @else
+            <button class="btn btn-danger btn-sm mx-2 addCart" disabled>
+                Ended
+            </button>
+            @endif
             <input type="hidden" name="quantity" id="quantity" value="1">
         </div>
     </div>

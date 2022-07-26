@@ -23,8 +23,6 @@ class PaymentController extends Controller
         $this->checkUserLoggedIn();
         $this->chackCartIsNotEmpty();
 
-        $amount = Cart::getTotalAmount();
-
         $user = User::where('id', Session::get('SESSION_USER_ID'))->first();
 
         try {
@@ -58,7 +56,9 @@ class PaymentController extends Controller
             ]);
 
             $idpayRequest = new IDPayRequest(Cart::getTotalAmount(), $user, $order->id);
+
             $paymentService = new PaymentService(PaymentService::IDPAY, $idpayRequest);
+
             return $paymentService->pay();
         } catch (\Exception $e) {
             die($e->getMessage());
@@ -95,8 +95,28 @@ class PaymentController extends Controller
             return Redirect::to('/cart');
         }
 
+        Order::where('id', $result['order_id'])->update([
+            'status' => 'paid'
+        ]);
+
+        Payment::where('order_id', $result['order_id'])->update([
+            'status' => 'paid'
+        ]);
+
+        foreach (Session::get('cart') as $item) {
+            $this->decreaseQuantityAfterPayment($item);
+        }
+
         Session::remove('cart');
         Session::add('payment', 'Payment was successful');
         return Redirect::to('/cart');
+    }
+
+    private function decreaseQuantityAfterPayment($item)
+    {
+        $product = Product::where('id', $item['id'])->first();
+        $product->update([
+            'quantity' => $product->quantity - $item['quantity']
+        ]);
     }
 }
