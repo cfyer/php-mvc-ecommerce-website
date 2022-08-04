@@ -54,7 +54,11 @@ class ProductController extends Controller
         if (!$validation)
             RequestValidation::sendErrorsAndRedirect('/admin/products/create');
 
-        $image_path = $this->uploadProductImage('/admin/products/create');
+        $image_path = $this->uploadProductImage();
+        if ($image_path == false) {
+            Session::add('invalids', ['s' => 'The image is invalid']);
+            return Redirect::to('/admin/products/create');
+        }
 
         Product::create([
             'name' => $request->name,
@@ -69,14 +73,17 @@ class ProductController extends Controller
         return Redirect::to('/admin/products');
     }
 
-    protected function uploadProductImage($page)
+    protected function uploadProductImage()
     {
         $file = Request::get('file', true);
         $file_name = $file->image->name;
 
+        if (empty($file_name) or $file_name == "" or strlen($file_name) < 1) {
+            return false;
+        }
+
         if (!FileUpload::isImage($file_name)) {
-            Session::add('invalids', ['s' => 'The image is invalid']);
-            return Redirect::to($page);
+            return false;
         }
 
         $file_temp = $file->image->tmp_name;
