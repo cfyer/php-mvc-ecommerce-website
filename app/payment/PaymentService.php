@@ -15,16 +15,25 @@ class PaymentService
         //
     }
 
+    /**
+     * @throws GatewayNotFoundException
+     */
     public function pay()
     {
         return $this->findGateway()->pay();
     }
 
+    /**
+     * @throws GatewayNotFoundException
+     */
     public function verify()
     {
         return $this->findGateway()->verify();
     }
 
+    /**
+     * @throws GatewayNotFoundException
+     */
     protected function findGateway()
     {
         $gateway = "App\Payment\Gateways\\{$this->gateway}";

@@ -1,0 +1,21 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Annotator" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="InjectedReferences" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="JSClosureCompilerSyntax" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSLastCommaInArrayLiteral" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSLastCommaInObjectLiteral" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSOctalInteger" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="PhpArrayToStringConversionInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PhpConstantReassignmentInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PhpContinueTargetingSwitchInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="PhpDeprecatedSerializableUsageInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PhpRegExpUnsupportedModifierInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PhpUndefinedVariableInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="PhpUnitDeprecatedExpectExceptionInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="ReassignedToPlainText" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SqlDialectInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>

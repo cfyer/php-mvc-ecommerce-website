@@ -11,7 +11,7 @@ class IDPayRequest implements RequestContract
         //
     }
 
-    public function getAmount()
+    public function getAmount(): float|int
     {
         return $this->amount * 10;
     }
