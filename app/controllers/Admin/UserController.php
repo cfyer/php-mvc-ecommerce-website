@@ -9,7 +9,6 @@ use App\Core\RequestValidation;
 use App\Core\Session;
 use App\Core\View;
 use App\Models\User;
-use App\Utilities\Redirect;
 
 class UserController extends Controller
 {
@@ -56,7 +55,7 @@ class UserController extends Controller
         ]);
 
         Session::add('message', 'User updated successfuly');
-        return Redirect::to('/admin/users');
+        return redirect('/admin/users');
     }
 
     public function delete($id)
@@ -64,6 +63,6 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         $user->delete();
         Session::add('message', 'User deleted');
-        return Redirect::to('/admin/users');
+        return redirect('/admin/users');
     }
 }

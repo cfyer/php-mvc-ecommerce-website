@@ -11,7 +11,6 @@ use App\Core\Session;
 use App\Core\View;
 use App\Middlewares\Role;
 use App\Models\Slider;
-use App\Utilities\Redirect;
 
 class SliderController extends Controller
 {
@@ -51,7 +50,7 @@ class SliderController extends Controller
         ]);
 
         Session::add('message', 'Slide added successfuly');
-        return Redirect::to('/admin/slider/');
+        return redirect('/admin/slider/');
     }
 
     protected function uploadSlideImage()
@@ -61,7 +60,7 @@ class SliderController extends Controller
 
         if (!FileUpload::isImage($file_name)) {
             Session::add('invalids', ['s' => 'The image is invalid']);
-            return Redirect::to('/admin/slider/create');
+            return redirect('/admin/slider/create');
         }
 
         $file_temp = $file->image_path->tmp_name;
@@ -74,7 +73,7 @@ class SliderController extends Controller
         unlink($slide->image_path);
         $slide->delete();
         Session::add('message', 'slide deleted successfuly');
-        return Redirect::to('/admin/slider');
+        return redirect('/admin/slider');
     }
 
     public function activeSwitch($id)
@@ -83,6 +82,6 @@ class SliderController extends Controller
         $slide->update([
             'is_active' => 1 - $slide->is_active
         ]);
-        return Redirect::to('/admin/slider');
+        return redirect('/admin/slider');
     }
 }

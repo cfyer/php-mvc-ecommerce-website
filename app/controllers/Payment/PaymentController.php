@@ -14,7 +14,6 @@ use App\Models\User;
 use App\Payment\PaymentService;
 use App\Payment\Requests\IDPayRequest;
 use App\Payment\Requests\IDPayVerifyRequest;
-use App\Utilities\Redirect;
 
 class PaymentController extends Controller
 {
@@ -71,13 +70,13 @@ class PaymentController extends Controller
             return true;
         }
 
-        return Redirect::to('/login');
+        return redirect('/login');
     }
 
     protected function chackCartIsNotEmpty()
     {
         if (is_null(Session::get('cart'))) {
-            return Redirect::to('/');
+            return redirect('/');
         }
 
         return true;
@@ -90,9 +89,9 @@ class PaymentController extends Controller
         $paymentService = new PaymentService(PaymentService::IDPAY, $idpayVerifyRequest);
         $result = $paymentService->verify();
 
-        if ($result == false or $result['status'] != 100) {
+        if (!$result or $result['status'] != 100) {
             Session::add('payment', 'Payment failed');
-            return Redirect::to('/cart');
+            return redirect('/cart');
         }
 
         Order::where('id', $result['order_id'])->update([
@@ -109,7 +108,7 @@ class PaymentController extends Controller
 
         Session::remove('cart');
         Session::add('payment', 'Payment was successful');
-        return Redirect::to('/cart');
+        return redirect('/cart');
     }
 
     private function decreaseQuantityAfterPayment($item)

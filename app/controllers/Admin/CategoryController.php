@@ -10,7 +10,6 @@ use App\Core\Session;
 use App\Core\View;
 use App\Middlewares\Role;
 use App\Models\Category;
-use App\Utilities\Redirect;
 
 class CategoryController extends Controller
 {
@@ -45,7 +44,7 @@ class CategoryController extends Controller
         ]);
 
         Session::add('message', 'Category created successfuly');
-        return Redirect::to('/admin/categories');
+        return redirect('/admin/categories');
     }
 
     public function edit($id)
@@ -71,13 +70,13 @@ class CategoryController extends Controller
         ]);
 
         Session::add('message', 'Category updated successfuly');
-        return Redirect::to('/admin/categories');
+        return redirect('/admin/categories');
     }
 
     public function delete($id)
     {
         $category = Category::where('id', $id)->delete();
         Session::add('message', 'Category deleted successfuly');
-        return Redirect::to('/admin/categories');
+        return redirect('/admin/categories');
     }
 }

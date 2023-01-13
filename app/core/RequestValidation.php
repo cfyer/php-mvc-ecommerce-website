@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-use App\Utilities\Redirect;
 use Illuminate\Database\Capsule\Manager as DB;
 
 class RequestValidation
@@ -97,7 +96,7 @@ class RequestValidation
     public static function sendErrorsAndRedirect($page)
     {
         Session::add('invalids', self::$invalids);
-        Redirect::to($page);
+        redirect($page);
         exit();
     }
 }

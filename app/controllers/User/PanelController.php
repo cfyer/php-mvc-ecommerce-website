@@ -11,7 +11,6 @@ use App\Core\View;
 use App\Middlewares\Auth;
 use App\Models\Order;
 use App\Models\User;
-use App\Utilities\Redirect;
 
 class PanelController extends Controller
 {
@@ -59,7 +58,7 @@ class PanelController extends Controller
         ]);
 
         Session::add('message', 'profile updated successfully');
-        return Redirect::to('/panel');
+        return redirect('/panel');
     }
 
     public function editPassword($id)
@@ -88,7 +87,7 @@ class PanelController extends Controller
 
         if (sha1($request->oldPassword) !== $user->password) {
             Session::add('invalids', ['old password incorrect']);
-            return Redirect::to("/panel/{$id['id']}/edit/password");
+            return redirect("/panel/{$id['id']}/edit/password");
         }
 
         $user->update([
@@ -96,7 +95,7 @@ class PanelController extends Controller
         ]);
 
         Session::add('message', 'password updated');
-        return Redirect::to("/panel");
+        return redirect("/panel");
     }
 
     public function orders($userid)

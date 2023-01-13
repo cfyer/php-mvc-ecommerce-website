@@ -15,6 +15,10 @@ switch ($command[1]) {
         help();
         break;
 
+    case 'view:cache':
+        clearViewsCache();
+        break;
+
     default:
         exit('Command not found');
 }
@@ -30,12 +34,24 @@ function env():void
     echo 'env file created';
 }
 
+function clearViewsCache(): void
+{
+    $files = glob('./resources/cache/*.php');
+
+    foreach ($files as $file){
+        unlink($file);
+    }
+
+    echo "views cache cleared";
+}
+
 function help(): void
 {
     $document = [
-        "help   => show help",
-        "serve  => start server | param => ip:port (php command.php serve 127.0.0.1:8000)",
-        "env    => build .env (environment variables) file"
+        "help         => show help",
+        "serve        => start server | param => ip:port (php command.php serve 127.0.0.1:8000)",
+        "env          => build .env (environment variables) file",
+        "view:cache   => clear views cache"
     ];
 
     echo implode(PHP_EOL, $document);

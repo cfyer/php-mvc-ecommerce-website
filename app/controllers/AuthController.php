@@ -8,14 +8,13 @@ use App\Core\RequestValidation;
 use App\Core\Session;
 use App\Core\View;
 use App\Models\User;
-use App\Utilities\Redirect;
 
 class AuthController
 {
     public function __construct()
     {
         if (is_auth()) {
-            return Redirect::to('/');
+            return redirect('/');
         }
     }
 
@@ -54,7 +53,7 @@ class AuthController
 
         Session::add('SESSION_USER_ID', $user->id);
         Session::add('SESSION_USER_NAME', $user->fullname);
-        return Redirect::to('/');
+        return redirect('/');
     }
 
     public function login()
@@ -79,19 +78,19 @@ class AuthController
 
         if (!$userQuery->exists()) {
             Session::add('invalids', ['User not found']);
-            return Redirect::to('/login');
+            return redirect('/login');
         }
 
         $user = $userQuery->first();
 
         if (sha1($request->password) !== $user->password) {
             Session::add('invalids', ['Password is invalid']);
-            return Redirect::to('/login');
+            return redirect('/login');
         }
 
         Session::add('SESSION_USER_ID', $user->id);
         Session::add('SESSION_USER_NAME', $user->fullname);
-        return Redirect::to('/');
+        return redirect('/');
     }
 
     public function logout()
@@ -105,6 +104,6 @@ class AuthController
             }
         }
 
-        return Redirect::to('/login');
+        return redirect('/login');
     }
 }

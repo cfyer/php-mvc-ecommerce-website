@@ -3,9 +3,10 @@
 use App\Core\Session;
 use App\Models\User;
 use Illuminate\Database\Capsule\Manager as DB;
+use JetBrains\PhpStorm\NoReturn;
 use voku\helper\Paginator;
 
-function paginate($num_of_records, $total_count, $table)
+function paginate($num_of_records, $total_count, $table): array|null
 {
     $pages = new Paginator($num_of_records, 'page');
     $pages->set_total($total_count);
@@ -18,7 +19,8 @@ function paginate($num_of_records, $total_count, $table)
 }
 
 
-function dump($data)
+#[NoReturn]
+function dump($data): void
 {
     echo "<pre>";
     var_dump($data);
@@ -26,9 +28,9 @@ function dump($data)
     die;
 }
 
-function is_auth()
+function is_auth(): bool
 {
-    return Session::has('SESSION_USER_NAME') ? true : false;
+    return Session::has('SESSION_USER_NAME');
 }
 
 function user()
@@ -37,4 +39,9 @@ function user()
         return User::where('id', Session::get('SESSION_USER_ID'))->first();
     }
     return false;
+}
+
+function redirect(string $page): void
+{
+    header("location: $page");
 }

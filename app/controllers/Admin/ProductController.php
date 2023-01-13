@@ -12,11 +12,10 @@ use App\Core\View;
 use App\Middlewares\Role;
 use App\Models\Category;
 use App\Models\Product;
-use App\Utilities\Redirect;
 
 class ProductController extends Controller
 {
-    protected $count = null;
+    protected ?int $count = null;
 
     public function __construct()
     {
@@ -55,9 +54,9 @@ class ProductController extends Controller
             RequestValidation::sendErrorsAndRedirect('/admin/products/create');
 
         $image_path = $this->uploadProductImage();
-        if ($image_path == false) {
+        if (!$image_path) {
             Session::add('invalids', ['s' => 'The image is invalid']);
-            return Redirect::to('/admin/products/create');
+            return redirect('/admin/products/create');
         }
 
         Product::create([
@@ -70,7 +69,7 @@ class ProductController extends Controller
         ]);
 
         Session::add('message', 'Product created successfuly');
-        return Redirect::to('/admin/products');
+        return redirect('/admin/products');
     }
 
     protected function uploadProductImage()
@@ -136,7 +135,7 @@ class ProductController extends Controller
         ]);
 
         Session::add('message', 'Product updated successfuly');
-        return Redirect::to('/admin/products');
+        return redirect('/admin/products');
     }
 
     public function delete($id)
@@ -145,6 +144,6 @@ class ProductController extends Controller
         unlink($product->image_path);
         $product->delete();
         Session::add('message', 'Product deleted successfuly');
-        return Redirect::to('/admin/products');
+        return redirect('/admin/products');
     }
 }
