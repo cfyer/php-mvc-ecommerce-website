@@ -25,17 +25,11 @@ class Request
         return $request->$key;
     }
 
-    public static function has($key)
+    public static function has($key): bool
     {
         if (array_key_exists($key, self::all(true)))
             return true;
 
         return false;
-    }
-
-    public static function old($key, $value)
-    {
-        $data = self::all();
-        return isset($data->$key->$value) ? $data->$key->$value : '';
     }
 }

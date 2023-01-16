@@ -14,12 +14,14 @@ class PaymentController extends Controller
     function __construct()
     {
         Role::admin();
+
         $this->count = Payment::count();
     }
 
-    public function index()
+    public function index(): View
     {
         list($payments, $links) = paginate(10, $this->count, 'payments');
-        return View::blade('admin.payments.index', compact('payments', 'links'));
+
+        return View::render()->blade('admin.payments.index', compact('payments', 'links'));
     }
 }

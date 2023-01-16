@@ -14,9 +14,10 @@ class OrderController extends Controller
         Role::admin();
     }
 
-    public function index()
+    public function index(): View
     {
         $orders = Order::orderBy('id', 'DESC')->get();
+
         return View::blade('admin.orders.index', compact('orders'));
     }
 }

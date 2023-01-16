@@ -10,7 +10,16 @@ class Database
     {
         $db = new DB();
 
-        $db->addConnection([
+        $db->addConnection($this->connectionParams());
+
+        $db->setAsGlobal();
+
+        $db->bootEloquent();
+    }
+
+    private function connectionParams(): array
+    {
+        return [
             'driver' => $_ENV['DB_DRIVER'],
             'host' => $_ENV['DB_HOST'],
             'database' => $_ENV['DB_NAME'],
@@ -19,10 +28,6 @@ class Database
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-        ]);
-
-        $db->setAsGlobal();
-
-        $db->bootEloquent();
+        ];
     }
 }

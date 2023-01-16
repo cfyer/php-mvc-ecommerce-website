@@ -3,49 +3,47 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
-use App\Core\CSRFToken;
-use App\Core\Request;
-use App\Core\RequestValidation;
-use App\Core\Session;
-use App\Core\View;
+use App\Core\{CSRFToken, Request, RequestValidation, Session, View};
 use App\Models\User;
-use App\Utilities\Redirect;
+use Exception;
 
 class UserController extends Controller
 {
-    protected $count = null;
+    protected int $count;
 
     public function __construct()
     {
         $this->count = User::count();
     }
 
-    public function index()
+    public function index(): View
     {
         list($users, $links) = paginate('10', $this->count, 'users');
-        return View::blade('admin.users.index', compact('users', 'links'));
+
+        return View::render()->blade('admin.users.index', compact('users', 'links'));
     }
 
-    public function edit($id)
+    public function edit($id): View
     {
         $user = User::where('id', $id)->first();
-        return View::blade('admin.users.edit', compact('user'));
+
+        return View::render()->blade('admin.users.edit', compact('user'));
     }
 
-    public function update($id)
+    /**
+     * @throws Exception
+     */
+    public function update($id): void
     {
         $request = Request::get('post');
 
         CSRFToken::verify($request->csrf, false);
 
-        $validation = RequestValidation::validate($request, [
+        RequestValidation::validate($request, [
             'fullname' => ['required' => true],
             'username' => ['required' => true],
             'role' => ['required' => true],
         ]);
-
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect("/admin/users/{$id['id']}/edit/");
 
         $user = User::where('id', $id)->first();
 
@@ -55,15 +53,15 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        Session::add('message', 'User updated successfuly');
-        return Redirect::to('/admin/users');
+        Session::add('message', 'User updated successfully');
+        redirect('/admin/users');
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         $user = User::where('id', $id)->first();
         $user->delete();
         Session::add('message', 'User deleted');
-        return Redirect::to('/admin/users');
+        redirect('/admin/users');
     }
 }

@@ -2,17 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Core\Request;
-use App\Core\Session;
-use App\Core\View;
+use App\Core\{Request, Session, View};
 use App\Models\Product;
 
 class CartController
 {
-    public function show()
+    public function show(): View
     {
         $cartItems = Session::get('cart');
-        return View::blade('client.cart.show', compact('cartItems'));
+
+        return View::render()->blade('client.cart.show', compact('cartItems'));
     }
 
     public function addItem()
@@ -41,7 +40,7 @@ class CartController
         return true;
     }
 
-    public function decQty()
+    public function decQty(): true
     {
         $id = Request::get('post')->id;
         if ($_SESSION['cart'][$id]['quantity'] <= 1) {
@@ -57,17 +56,15 @@ class CartController
         return Session::get('cart');
     }
 
-    public function removeItem()
+    public function removeItem(): void
     {
         $id = Request::get('post')->id;
         unset($_SESSION['cart'][$id]);
-        return true;
     }
 
-    public function removeAll()
+    public function removeAll(): void
     {
         Session::remove('cart');
         Session::add('cart', []);
-        return true;
     }
 }

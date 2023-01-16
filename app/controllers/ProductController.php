@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Core\CSRFToken;
-use App\Core\Request;
-use App\Core\View;
+use App\Core\{Request, View};
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -16,7 +14,7 @@ class ProductController extends Controller
         $this->count = Product::all()->count();
     }
 
-    public function index()
+    public function index(): View
     {
         list($products, $links) = paginate(8, $this->count, 'products');
 
@@ -25,13 +23,15 @@ class ProductController extends Controller
             $products = Product::where('name', 'LIKE', '%' . $request->key . '%')->get();
         }
 
-        return View::blade('client.products.index', compact('products', 'links'));
+        return View::render()->blade('client.products.index', compact('products', 'links'));
     }
 
-    public function show($id)
+    public function show($id): View
     {
         $product = Product::where('id', $id)->first();
+
         $similarProducts = Product::query()->where('category_id', $product->category->id)->orderBy('id', 'DESC')->limit(4)->get();
-        return View::blade('client.products.show', compact('product', 'similarProducts'));
+
+        return View::render()->blade('client.products.show', compact('product', 'similarProducts'));
     }
 }
