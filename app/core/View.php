@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use Philo\Blade\Blade;
+use Jenssegers\Blade\Blade;
 
 class View
 {
@@ -24,7 +24,7 @@ class View
     {
         $blade = new Blade($this->path, $this->cache);
 
-        echo $blade->view()->make($viewname, $arguments)->render();
+        echo $blade->make($viewname, $arguments)->render();
 
         return $this;
     }
