@@ -4,7 +4,6 @@ namespace App\Payment\Gateways;
 
 use App\Payment\Contracts\PayContract;
 use App\Payment\Contracts\VerifyContract;
-use App\Payment\Requests\IDPayRequest;
 use InvalidArgumentException;
 
 class IDPay implements PayContract, VerifyContract
@@ -45,7 +44,7 @@ class IDPay implements PayContract, VerifyContract
             throw new InvalidArgumentException($result['error_message']);
         }
 
-        return redirect($result['link']);
+         redirect($result['link']);
     }
 
     public function verify()

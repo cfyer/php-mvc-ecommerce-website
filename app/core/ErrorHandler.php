@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class ErrorHandler
 {
@@ -16,14 +17,14 @@ class ErrorHandler
         $this->local();
     }
 
-    protected function local()
+    protected function local(): void
     {
-        $whoops = new \Whoops\Run;
+        $whoops = new Run;
         $whoops->pushHandler(new PrettyPageHandler);
         $whoops->register();
     }
 
-    protected function production()
+    protected function production(): void
     {
         ini_set('display_errors', 0);
     }

@@ -3,24 +3,19 @@
 namespace App\Controllers\Payment;
 
 use App\Controllers\Controller;
-use App\Core\Cart;
-use App\Core\Request;
-use App\Core\Session;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\Payment;
-use App\Models\Product;
-use App\Models\User;
+use App\Payment\Exceptions\GatewayNotFoundException;
+use App\Core\{Cart, Session, Request};
+use Exception;
+use App\Models\{Order, OrderItem, Payment, Product, User};
 use App\Payment\PaymentService;
-use App\Payment\Requests\IDPayRequest;
-use App\Payment\Requests\IDPayVerifyRequest;
+use App\Payment\Requests\{IDPayRequest, IDPayVerifyRequest};
 
 class PaymentController extends Controller
 {
     public function pay()
     {
         $this->checkUserLoggedIn();
-        $this->chackCartIsNotEmpty();
+        $this->checkCartIsNotEmpty();
 
         $user = User::where('id', Session::get('SESSION_USER_ID'))->first();
 
@@ -47,7 +42,7 @@ class PaymentController extends Controller
                 ]);
             }
 
-            $payment = Payment::create([
+            Payment::create([
                 'order_id' => $order->id,
                 'ref_id' => rand(1111, 9999),
                 'res_id' => rand(1111, 9999),
@@ -59,30 +54,29 @@ class PaymentController extends Controller
             $paymentService = new PaymentService(PaymentService::IDPAY, $idpayRequest);
 
             return $paymentService->pay();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    protected function checkUserLoggedIn()
+    protected function checkUserLoggedIn(): void
     {
-        if (Session::has('SESSION_USER_ID') && Session::has('SESSION_USER_NAME')) {
-            return true;
+        if (!(Session::has('SESSION_USER_ID') && Session::has('SESSION_USER_NAME'))) {
+            redirect('/login');
         }
-
-        return redirect('/login');
     }
 
-    protected function chackCartIsNotEmpty()
+    protected function checkCartIsNotEmpty(): void
     {
         if (is_null(Session::get('cart'))) {
-            return redirect('/');
+            redirect('/');
         }
-
-        return true;
     }
 
-    public function callback()
+    /**
+     * @throws GatewayNotFoundException
+     */
+    public function callback(): void
     {
         $request = Request::get('post');
         $idpayVerifyRequest = new IDPayVerifyRequest($request->id, $request->order_id);
@@ -91,7 +85,7 @@ class PaymentController extends Controller
 
         if (!$result or $result['status'] != 100) {
             Session::add('payment', 'Payment failed');
-            return redirect('/cart');
+            redirect('/cart');
         }
 
         Order::where('id', $result['order_id'])->update([
@@ -108,7 +102,7 @@ class PaymentController extends Controller
 
         Session::remove('cart');
         Session::add('payment', 'Payment was successful');
-        return redirect('/cart');
+        redirect('/cart');
     }
 
     private function decreaseQuantityAfterPayment($item)

@@ -3,15 +3,10 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
-use App\Core\CSRFToken;
-use App\Core\FileUpload;
-use App\Core\Request;
-use App\Core\RequestValidation;
-use App\Core\Session;
-use App\Core\View;
+use App\Core\{CSRFToken, FileUpload, RequestValidation, Request, Session, View};
 use App\Middlewares\Role;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\{Category, Product};
+use Exception;
 
 class ProductController extends Controller
 {
@@ -23,26 +18,30 @@ class ProductController extends Controller
         $this->count = Product::all()->count();
     }
 
-    public function index()
+    public function index(): View
     {
         list($products, $links) = paginate(10, $this->count, 'products');
-        return View::blade('admin.products.index', compact('products', 'links'));
+
+        return View::render()->blade('admin.products.index', compact('products', 'links'));
     }
 
-    public function create()
+    public function create(): View
     {
-        return View::blade('admin.products.create', [
-            'categories' => Category::all()
-        ]);
+        $categories = Category::all();
+
+        return View::render()->blade('admin.products.create', compact('categories'));
     }
 
-    public function store()
+    /**
+     * @throws Exception
+     */
+    public function store(): void
     {
         $request = Request::get('post');
 
         CSRFToken::verify($request->csrf, false);
 
-        $validation = RequestValidation::validate($request, [
+        RequestValidation::validate($request, [
             'name' => ['required' => true, 'unique' => 'products'],
             'price' => ['required' => true, 'number' => true, 'min' => 1],
             'quantity' => ['required' => true, 'number' => true, 'min' => 1],
@@ -50,13 +49,11 @@ class ProductController extends Controller
             'description' => ['required' => true],
         ]);
 
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect('/admin/products/create');
-
         $image_path = $this->uploadProductImage();
+
         if (!$image_path) {
             Session::add('invalids', ['s' => 'The image is invalid']);
-            return redirect('/admin/products/create');
+            redirect('/admin/products/create');
         }
 
         Product::create([
@@ -68,13 +65,14 @@ class ProductController extends Controller
             'image_path' => $image_path
         ]);
 
-        Session::add('message', 'Product created successfuly');
-        return redirect('/admin/products');
+        Session::add('message', 'Product created successfully');
+
+        redirect('/admin/products');
     }
 
-    protected function uploadProductImage()
+    protected function uploadProductImage(): false|string
     {
-        $file = Request::get('file', true);
+        $file = Request::get('file');
         $file_name = $file->image->name;
 
         if (empty($file_name) or $file_name == "" or strlen($file_name) < 1) {
@@ -86,25 +84,29 @@ class ProductController extends Controller
         }
 
         $file_temp = $file->image->tmp_name;
-        $image_path = FileUpload::move($file_temp, 'images/products', $file_name)->getPath();
 
-        return $image_path;
+        return FileUpload::move($file_temp, 'images/products', $file_name)->getPath();
     }
 
-    public function edit($id)
+    public function edit($id): View
     {
         $product = Product::where('id', $id)->first();
+
         $categories = Category::all();
-        return View::blade('admin.products.edit', compact('product', 'categories'));
+
+        return View::render()->blade('admin.products.edit', compact('product', 'categories'));
     }
 
-    public function update($id)
+    /**
+     * @throws Exception
+     */
+    public function update($id): void
     {
         $request = Request::get('post');
 
         CSRFToken::verify($request->csrf, false);
 
-        $validation = RequestValidation::validate($request, [
+        RequestValidation::validate($request, [
             'name' => ['required' => true],
             'price' => ['required' => true, 'number' => true, 'min' => 1],
             'quantity' => ['required' => true, 'number' => true, 'min' => 1],
@@ -112,15 +114,12 @@ class ProductController extends Controller
             'description' => ['required' => true],
         ]);
 
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect("/admin/products/{$id['id']}/edit/");
-
         $product = Product::where('id', $id)->first();
 
-        $file = Request::get('file', true);
+        $file = Request::get('file');
         $file_name = $file->image->name;
         if (!empty($file_name)) {
-            $image_path = $this->uploadProductImage("/admin/products/{$id['id']}/edit/");
+            $image_path = $this->uploadProductImage();
         } else {
             $image_path = $product->image_path;
         }
@@ -134,16 +133,21 @@ class ProductController extends Controller
             'image_path' => $image_path
         ]);
 
-        Session::add('message', 'Product updated successfuly');
-        return redirect('/admin/products');
+        Session::add('message', 'Product updated successfully');
+
+        redirect('/admin/products');
     }
 
-    public function delete($id)
+    public function delete($id): void
     {
         $product = Product::where('id', $id)->first();
+
         unlink($product->image_path);
+
         $product->delete();
-        Session::add('message', 'Product deleted successfuly');
-        return redirect('/admin/products');
+
+        Session::add('message', 'Product deleted successfully');
+
+        redirect('/admin/products');
     }
 }

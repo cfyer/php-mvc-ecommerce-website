@@ -13,8 +13,8 @@ class DashboardController extends Controller
         Role::admin();
     }
 
-    public function index()
+    public function index(): View
     {
-        return View::blade('admin.dashboard');
+        return View::render()->blade('admin.dashboard');
     }
 }

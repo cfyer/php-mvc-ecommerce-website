@@ -3,80 +3,81 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
-use App\Core\CSRFToken;
-use App\Core\Request;
-use App\Core\RequestValidation;
-use App\Core\Session;
-use App\Core\View;
+use App\Core\{CSRFToken, Request, RequestValidation, Session, View};
 use App\Middlewares\Role;
 use App\Models\Category;
+use Exception;
 
 class CategoryController extends Controller
 {
-    protected $count = null;
+    protected int $count;
 
     public function __construct()
     {
         Role::admin();
+
         $this->count = Category::all()->count();
     }
 
-    public function index()
+    public function index(): View
     {
         list($categories, $links) = paginate(10, $this->count, 'categories');
-        return View::blade('admin.categories.index', compact('categories','links'));
+
+        return View::render()->blade('admin.categories.index', compact('categories','links'));
     }
 
-    public function store()
+    /**
+     * @throws Exception
+     */
+    public function store(): void
     {
         $request = Request::get('post');
 
-        CSRFToken::verify($request->csrf);
+        CSRFToken::verify($request->csrf, false);
 
-        $validation = RequestValidation::validate($request, [
-            'name' => ['required' => true, 'unique' => 'categories']
-        ]);
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect('/admin/categories');
-
-        Category::create([
-            'name' => $request->name,
+        RequestValidation::validate($request, [
+            'name' => ['unique' => 'categories', 'required' => true]
         ]);
 
-        Session::add('message', 'Category created successfuly');
-        return redirect('/admin/categories');
+        Category::create(['name' => $request->name]);
+
+        Session::add('message', 'Category created successfully');
+        redirect('/admin/categories');
     }
 
-    public function edit($id)
+    public function edit($id): View
     {
         $category = Category::where('id', $id)->first();
-        return View::blade('admin.categories.edit', compact('category'));
+
+        return View::render()->blade('admin.categories.edit', compact('category'));
     }
 
-    public function update($id)
+    /**
+     * @throws Exception
+     */
+    public function update($id): void
     {
         $request = Request::get('post');
         CSRFToken::verify($request->csrf);
 
-        $validation = RequestValidation::validate($request, [
+        RequestValidation::validate($request, [
             'name' => ['required' => true],
         ]);
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect("/admin/categories/{$id['id']}/edit/");
 
         $category = Category::where('id', $id)->first();
-        $category->update([
-            'name' => $request->name,
-        ]);
 
-        Session::add('message', 'Category updated successfuly');
-        return redirect('/admin/categories');
+        $category->update(['name' => $request->name,]);
+
+        Session::add('message', 'Category updated successfully');
+        redirect('/admin/categories');
     }
 
-    public function delete($id)
+    public function delete( $id): void
     {
-        $category = Category::where('id', $id)->delete();
-        Session::add('message', 'Category deleted successfuly');
-        return redirect('/admin/categories');
+        Category::where('id', $id)->delete();
+
+        Session::add('message', 'Category deleted successfully');
+
+        redirect('/admin/categories');
     }
 }

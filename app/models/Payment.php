@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 
+/**
+ * @method static count()
+ * @method static create(array $array)
+ * @method static where(string $string, $order_id)
+ */
 class Payment extends Model
 {
     use SoftDeletes;

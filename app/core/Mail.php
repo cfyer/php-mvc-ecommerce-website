@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail
@@ -14,7 +15,7 @@ class Mail
         $this->config();
     }
 
-    protected function config()
+    protected function config(): void
     {
         $this->mail = new PHPMailer();
         $this->mail->isSMTP();
@@ -25,12 +26,15 @@ class Mail
         $this->mail->Password = $_ENV['MAIL_PASSWORD'];
     }
 
-    public static function send($mailview, $data)
+    /**
+     * @throws Exception
+     */
+    public static function send($mailView, $data): bool
     {
         $static = new static;
         $static->mail->addAddress($data['to'], $data['name']);
         $static->mail->Subject = $data['subject'];
-        $static->mail->Body = View::mail($mailview, $data);
+        $static->mail->Body = View::render()->mail($mailView, $data);
         return $static->mail->send();
     }
 }

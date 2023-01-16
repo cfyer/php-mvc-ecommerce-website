@@ -24,13 +24,13 @@ class Cart
         return $product->image_path;
     }
 
-    public static function getTotalProductPrice($id, $quantity)
+    public static function getTotalProductPrice($id, $quantity): float|int
     {
         $unit_price = static::getProductPrice($id);
         return $unit_price * $quantity;
     }
 
-    public static function getTotalAmount()
+    public static function getTotalAmount(): float|int
     {
         if (!Session::has('cart')) {
             return 0;

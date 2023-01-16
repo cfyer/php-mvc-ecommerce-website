@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use Exception;
+
 class CSRFToken
 {
     public static function _token()
@@ -14,10 +16,13 @@ class CSRFToken
         return Session::get('token');
     }
 
-    public static function verify($requet_token, $regenerate = true)
+    /**
+     * @throws Exception
+     */
+    public static function verify($request_token, $regenerate = true): true
     {
-        if (!Session::has('token') or Session::get('token') !== $requet_token)
-            return throw new \Exception("CSRF token is not valid");;
+        if (!Session::has('token') or Session::get('token') !== $request_token)
+            return throw new Exception("CSRF token is not valid");
 
         if ($regenerate)
             Session::remove('token');

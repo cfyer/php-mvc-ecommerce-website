@@ -3,14 +3,10 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
-use App\Core\CSRFToken;
-use App\Core\FileUpload;
-use App\Core\Request;
-use App\Core\RequestValidation;
-use App\Core\Session;
-use App\Core\View;
+use App\Core\{CSRFToken, FileUpload, Request, RequestValidation, Session, View};
 use App\Middlewares\Role;
 use App\Models\Slider;
+use Exception;
 
 class SliderController extends Controller
 {
@@ -19,28 +15,30 @@ class SliderController extends Controller
         Role::admin();
     }
 
-    public function index()
+    public function index(): View
     {
         $slides = Slider::all();
-        return View::blade('admin.slider.index', compact('slides'));
+
+        return View::render()->blade('admin.slider.index', compact('slides'));
     }
 
-    public function create()
+    public function create(): View
     {
-        return View::blade('admin.slider.create');
+        return View::render()->blade('admin.slider.create');
     }
 
-    public function store()
+    /**
+     * @throws Exception
+     */
+    public function store(): void
     {
         $request = Request::get('post');
 
         CSRFToken::verify($request->csrf, false);
 
-        $validation = RequestValidation::validate($request, [
+        RequestValidation::validate($request, [
             'link' => ['required' => true]
         ]);
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect('/admin/slider/create');
 
         $image_path = $this->uploadSlideImage();
 
@@ -49,8 +47,8 @@ class SliderController extends Controller
             'image_path' => $image_path
         ]);
 
-        Session::add('message', 'Slide added successfuly');
-        return redirect('/admin/slider/');
+        Session::add('message', 'Slide added successfully');
+        redirect('/admin/slider/');
     }
 
     protected function uploadSlideImage()
@@ -60,7 +58,7 @@ class SliderController extends Controller
 
         if (!FileUpload::isImage($file_name)) {
             Session::add('invalids', ['s' => 'The image is invalid']);
-            return redirect('/admin/slider/create');
+            redirect('/admin/slider/create');
         }
 
         $file_temp = $file->image_path->tmp_name;
@@ -72,16 +70,16 @@ class SliderController extends Controller
         $slide = Slider::where('id', $id)->first();
         unlink($slide->image_path);
         $slide->delete();
-        Session::add('message', 'slide deleted successfuly');
-        return redirect('/admin/slider');
+        Session::add('message', 'slide deleted successfully');
+        redirect('/admin/slider');
     }
 
-    public function activeSwitch($id)
+    public function activeSwitch($id): void
     {
         $slide = Slider::where('id', $id)->first();
         $slide->update([
             'is_active' => 1 - $slide->is_active
         ]);
-        return redirect('/admin/slider');
+        redirect('/admin/slider');
     }
 }

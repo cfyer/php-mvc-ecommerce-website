@@ -2,43 +2,40 @@
 
 namespace App\Controllers;
 
-use App\Core\CSRFToken;
-use App\Core\Request;
-use App\Core\RequestValidation;
-use App\Core\Session;
-use App\Core\View;
+use App\Core\{CSRFToken, Request, RequestValidation, Session, View};
 use App\Models\User;
+use Exception;
 
 class AuthController
 {
     public function __construct()
     {
         if (is_auth()) {
-            return redirect('/');
+            redirect('/');
         }
     }
 
-    public function register()
+    public function register(): View
     {
-        return View::blade('auth.register');
+        return View::render()->blade('auth.register');
     }
 
-    public function registerOperate()
+    /**
+     * @throws Exception
+     */
+    public function registerOperate(): void
     {
         $request = Request::get('post');
 
         CSRFToken::verify($request->csrf);
 
-        $validation = RequestValidation::validate($request, [
+        RequestValidation::validate($request, [
             'fullname' => ['required' => true],
             'email' => ['required' => true, 'unique' => 'users', 'email' => true],
             'username' => ['required' => true, 'unique' => 'users', 'min' => 5],
             'password' => ['required' => true, 'min' => 6],
             'address' => ['required' => true]
         ]);
-
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect('/register');
 
         User::create([
             'username' => $request->username,
@@ -53,47 +50,48 @@ class AuthController
 
         Session::add('SESSION_USER_ID', $user->id);
         Session::add('SESSION_USER_NAME', $user->fullname);
-        return redirect('/');
+        redirect('/');
     }
 
-    public function login()
+    public function login(): View
     {
-        return View::blade('auth.login');
+        return View::render()->blade('auth.login');
     }
 
-    public function loginOperate()
+    /**
+     * @throws Exception
+     */
+    public function loginOperate(): void
     {
         $request = Request::get('post');
 
         CSRFToken::verify($request->csrf, false);
 
-        $validation = RequestValidation::validate($request, [
+        RequestValidation::validate($request, [
             'username' => ['required' => true],
             'password' => ['required' => true, 'min' => 6]
         ]);
-        if (!$validation)
-            RequestValidation::sendErrorsAndRedirect('/login');
 
         $userQuery = User::where('username', $request->username);
 
         if (!$userQuery->exists()) {
             Session::add('invalids', ['User not found']);
-            return redirect('/login');
+            redirect('/login');
         }
 
         $user = $userQuery->first();
 
         if (sha1($request->password) !== $user->password) {
             Session::add('invalids', ['Password is invalid']);
-            return redirect('/login');
+            redirect('/login');
         }
 
         Session::add('SESSION_USER_ID', $user->id);
         Session::add('SESSION_USER_NAME', $user->fullname);
-        return redirect('/');
+        redirect('/');
     }
 
-    public function logout()
+    public function logout(): void
     {
         if (is_auth()) {
             Session::remove('SESSION_USER_ID');
@@ -104,6 +102,6 @@ class AuthController
             }
         }
 
-        return redirect('/login');
+        redirect('/login');
     }
 }

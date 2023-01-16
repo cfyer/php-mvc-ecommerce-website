@@ -7,18 +7,16 @@ use App\Models\User;
 
 class Role
 {
-    public static function admin()
+    public static function admin(): void
     {
         if (!(Session::has('SESSION_USER_ID') && Session::has('SESSION_USER_NAME'))) {
-            return redirect('/login');
+            redirect('/login');
         }
 
         $user = User::where('id', Session::get('SESSION_USER_ID'))->first();
 
-        if ($user->role == 'admin') {
-            return true;
+        if ($user->role <> 'admin') {
+            redirect('/');
         }
-
-        return redirect('/');
     }
 }

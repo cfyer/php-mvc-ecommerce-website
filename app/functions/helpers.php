@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\Session;
+use App\Core\View;
 use App\Models\User;
 use Illuminate\Database\Capsule\Manager as DB;
 use JetBrains\PhpStorm\NoReturn;
@@ -17,7 +18,6 @@ function paginate($num_of_records, $total_count, $table): array|null
         $pages->page_links()
     ];
 }
-
 
 #[NoReturn]
 function dump($data): void

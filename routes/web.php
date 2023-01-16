@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ========== Client Rotues ==========
+ * ========== Client Routes ==========
  */
 $router->map('GET', '[/]?', 'HomeController@index');
 
@@ -58,7 +58,7 @@ $router->map('POST', '/admin/slider/store/', 'Admin\SliderController@store');
 $router->map('POST', '/admin/slider/[i:id]/delete/', 'Admin\SliderController@delete');
 $router->map('GET', '/admin/slider/[i:id]/active/', 'Admin\SliderController@activeSwitch');
 
-# users 
+# users
 $router->map('GET', '/admin/users[/]?', 'Admin\UserController@index');
 $router->map('GET', '/admin/users/[i:id]/edit[/]?', 'Admin\UserController@edit');
 $router->map('POST', '/admin/users/[i:id]/update/', 'Admin\UserController@update');

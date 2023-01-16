@@ -9,9 +9,9 @@ class Session
         return $_SESSION[$name] = $value;
     }
 
-    public static function has($name)
+    public static function has($name): bool
     {
-        return isset($_SESSION[$name]) ? true : false;
+        return isset($_SESSION[$name]);
     }
 
     public static function get($name)
@@ -22,7 +22,7 @@ class Session
         return null;
     }
 
-    public static function remove($name)
+    public static function remove($name): void
     {
         if (self::has($name))
             unset($_SESSION[$name]);

@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-use App\Core\Database;
-use App\Core\ErrorHandler;
-use App\Core\RouteHandler;
+use App\Core\{Database, ErrorHandler, RouteHandler};
 
 define('BASE_PATH', realpath(__DIR__ . '/../../'));
 
@@ -17,5 +15,8 @@ new Database;
 
 $router = new AltoRouter();
 require_once BASE_PATH . "/routes/web.php";
-new RouteHandler($router);
-
+try {
+    new RouteHandler($router);
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
