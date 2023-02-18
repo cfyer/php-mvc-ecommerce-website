@@ -12,13 +12,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Category extends Model
 {
-    use SoftDeletes;
-    public $timestamps = true;
-    protected $fillable = ['name'];
-    protected $dates = ['deleted_at'];
+	use SoftDeletes;
 
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class, 'category_id', 'id');
-    }
+	public $timestamps = true;
+	protected $fillable = ['name'];
+	protected $dates = ['deleted_at'];
+
+	public function products(): HasMany
+	{
+		return $this->hasMany(Product::class, 'category_id', 'id');
+	}
 }

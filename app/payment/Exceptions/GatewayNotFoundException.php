@@ -2,7 +2,9 @@
 
 namespace App\Payment\Exceptions;
 
-class GatewayNotFoundException extends \Exception
+use Exception;
+
+class GatewayNotFoundException extends Exception
 {
     //
 }

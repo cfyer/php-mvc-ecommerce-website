@@ -7,7 +7,7 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    protected $count;
+    protected int $count;
 
     function __construct()
     {

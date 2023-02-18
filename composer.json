@@ -23,6 +23,8 @@
     "altorouter/altorouter": "^2.0",
     "phpmailer/phpmailer": "^6.7",
     "voku/pagination": "^4.0",
-    "cfyer/colorize-cli": "^1.1"
+    "cfyer/colorize-cli": "^1.1",
+    "ext-openssl": "*",
+    "ext-curl": "*"
   }
 }

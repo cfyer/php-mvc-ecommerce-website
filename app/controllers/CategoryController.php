@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Models\{Category, Product};
 
-class CategoryController
+class CategoryController extends Controller
 {
     public function show($id): View
     {

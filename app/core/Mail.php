@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail
 {
-    protected $mail;
+    protected PHPMailer $mail;
 
     public function __construct()
     {

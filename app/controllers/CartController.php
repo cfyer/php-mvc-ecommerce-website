@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Core\{Request, Session, View};
 use App\Models\Product;
 
-class CartController
+class CartController extends Controller
 {
     public function show(): View
     {
@@ -40,7 +40,7 @@ class CartController
         return true;
     }
 
-    public function decQty(): true
+    public function decQty(): bool
     {
         $id = Request::get('post')->id;
         if ($_SESSION['cart'][$id]['quantity'] <= 1) {

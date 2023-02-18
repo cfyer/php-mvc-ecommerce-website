@@ -11,13 +11,14 @@ use Illuminate\Database\Eloquent\{Model, Relations\HasMany, SoftDeletes};
  */
 class User extends Model
 {
-    use SoftDeletes;
-    public $timestamps = true;
-    protected $dates = ['deleted_at'];
-    protected $fillable = ['username', 'fullname', 'email', 'password', 'address', 'role'];
+	use SoftDeletes;
 
-    public function orders(): HasMany
-    {
-        return $this->hasMany(Order::class);
-    }
+	public $timestamps = true;
+	protected $dates = ['deleted_at'];
+	protected $fillable = ['username', 'fullname', 'email', 'password', 'address', 'role'];
+
+	public function orders(): HasMany
+	{
+		return $this->hasMany(Order::class);
+	}
 }

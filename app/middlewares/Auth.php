@@ -8,7 +8,7 @@ class Auth
 {
     public static function check(): void
     {
-        if (!(Session::has('SESSION_USER_ID') && Session::has('SESSION_USER_NAME'))) {
+        if (!(Session::has('SESSION_USER_ID') and Session::has('SESSION_USER_NAME'))) {
             redirect('/login');
         }
     }
