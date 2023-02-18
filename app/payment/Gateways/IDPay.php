@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 class IDPay implements PayContract, VerifyContract
 {
-    protected $successfulStatus = 100;
+    protected int $successfulStatus = 100;
 
     public function __construct(protected $request)
     {

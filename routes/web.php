@@ -51,7 +51,7 @@ $router->map('GET', '/admin/products/[i:id]/edit/', 'Admin\ProductController@edi
 $router->map('POST', '/admin/products/[i:id]/update/', 'Admin\ProductController@update');
 $router->map('POST', '/admin/products/[i:id]/delete/', 'Admin\ProductController@delete');
 
-# sldier
+# slider
 $router->map('GET', '/admin/slider[/]?', 'Admin\SliderController@index');
 $router->map('GET', '/admin/slider/create[/]?', 'Admin\SliderController@create');
 $router->map('POST', '/admin/slider/store/', 'Admin\SliderController@store');

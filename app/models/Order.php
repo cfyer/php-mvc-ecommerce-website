@@ -14,18 +14,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Order extends Model
 {
-    use SoftDeletes;
-    public $timestamps = true;
-    protected $guarded = [];
-    protected $dates = ['deleted_at'];
+	use SoftDeletes;
 
-    public function orderItems(): HasMany
-    {
-        return $this->hasMany(OrderItem::class);
-    }
+	public $timestamps = true;
+	protected $guarded = [];
+	protected $dates = ['deleted_at'];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+	public function orderItems(): HasMany
+	{
+		return $this->hasMany(OrderItem::class);
+	}
+
+	public function user(): BelongsTo
+	{
+		return $this->belongsTo(User::class);
+	}
 }

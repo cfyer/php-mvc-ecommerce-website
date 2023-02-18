@@ -12,7 +12,7 @@ class PaymentService
 
     public function __construct(protected string $gateway, protected RequestContract $request)
     {
-        //
+        # code ...
     }
 
     /**
@@ -39,7 +39,7 @@ class PaymentService
         $gateway = "App\Payment\Gateways\\{$this->gateway}";
 
         if (!class_exists($gateway)) {
-            throw new GatewayNotFoundException("Gateway {$this->gateway} not found");
+            throw new GatewayNotFoundException("Payment gateway {$this->gateway} not found");
         }
 
         return new $gateway($this->request);

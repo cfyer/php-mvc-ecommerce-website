@@ -6,13 +6,11 @@ use App\Core\{CSRFToken, Request, RequestValidation, Session, View};
 use App\Models\User;
 use Exception;
 
-class AuthController
+class AuthController extends Controller
 {
     public function __construct()
     {
-        if (is_auth()) {
-            redirect('/');
-        }
+		!is_auth() ?: redirect('/');
     }
 
     public function register(): View

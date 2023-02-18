@@ -9,18 +9,19 @@ use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, SoftDeletes};
  */
 class OrderItem extends Model
 {
-    use SoftDeletes;
-    public $timestamps = true;
-    protected $guarded = [];
-    protected $dates = ['deleted_at'];
+	use SoftDeletes;
 
-    public function order(): BelongsTo
-    {
-        return $this->belongsTo(Order::class);
-    }
+	public $timestamps = true;
+	protected $guarded = [];
+	protected $dates = ['deleted_at'];
 
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
-    }
+	public function order(): BelongsTo
+	{
+		return $this->belongsTo(Order::class);
+	}
+
+	public function product(): BelongsTo
+	{
+		return $this->belongsTo(Product::class);
+	}
 }
