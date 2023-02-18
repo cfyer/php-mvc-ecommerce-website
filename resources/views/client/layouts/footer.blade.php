@@ -34,7 +34,7 @@
             <div class="col-12">
                 <p class="text-center m-0 mb-2">© Copyright Reserved</p>
                 <p class="text-center m-0" style="font-size: 14px">
-                    Created by <a href="https://github.com/hamidrezasfy/" target="_blank">Hamireza Safayee</a>
+                    Created by <a href="https://github.com/cfyer/" target="_blank">Hamidreza Safayee</a>
                 </p>
             </div>
         </div>

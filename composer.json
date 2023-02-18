@@ -18,10 +18,11 @@
   },
   "require": {
     "jenssegers/blade": "^1.4",
-    "illuminate/database": "^7.1",
+    "illuminate/database": "^8.40.0",
     "vlucas/phpdotenv": "^5.5",
     "altorouter/altorouter": "^2.0",
     "phpmailer/phpmailer": "^6.7",
-    "voku/pagination": "^4.0"
+    "voku/pagination": "^4.0",
+    "cfyer/colorize-cli": "^1.1"
   }
 }
