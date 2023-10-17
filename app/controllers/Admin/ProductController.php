@@ -56,7 +56,7 @@ class ProductController extends Controller
             redirect('/admin/products/create');
         }
 
-        Product::create([
+        Product::query()->create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
@@ -90,7 +90,7 @@ class ProductController extends Controller
 
     public function edit($id): View
     {
-        $product = Product::where('id', $id)->first();
+        $product = Product::query()->where('id', $id)->first();
 
         $categories = Category::all();
 
@@ -114,7 +114,7 @@ class ProductController extends Controller
             'description' => ['required' => true],
         ]);
 
-        $product = Product::where('id', $id)->first();
+        $product = Product::query()->where('id', $id)->first();
 
         $file = Request::get('file');
         $file_name = $file->image->name;
@@ -140,7 +140,7 @@ class ProductController extends Controller
 
     public function delete($id): void
     {
-        $product = Product::where('id', $id)->first();
+        $product = Product::query()->where('id', $id)->first();
 
         unlink($product->image_path);
 

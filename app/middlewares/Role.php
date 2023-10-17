@@ -13,7 +13,7 @@ class Role
             redirect('/login');
         }
 
-        $user = User::where('id', Session::get('SESSION_USER_ID'))->first();
+        $user = User::query()->where('id', Session::get('SESSION_USER_ID'))->first();
 
         if ($user->role <> 'admin') {
             redirect('/');

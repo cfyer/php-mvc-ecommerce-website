@@ -70,7 +70,7 @@ class AuthController extends Controller
             'password' => ['required' => true, 'min' => 6]
         ]);
 
-        $userQuery = User::where('username', $request->username);
+        $userQuery = User::query()->where('username', $request->username);
 
         if (!$userQuery->exists()) {
             Session::add('invalids', ['User not found']);

@@ -11,10 +11,9 @@ class ErrorHandler
     {
         if ($_ENV['APP_MODE'] === 'production') {
             $this->production();
-            die;
+        }else{
+            $this->local();
         }
-
-        $this->local();
     }
 
     protected function local(): void

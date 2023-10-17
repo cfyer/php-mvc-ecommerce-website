@@ -42,7 +42,7 @@ class SliderController extends Controller
 
         $image_path = $this->uploadSlideImage();
 
-        Slider::create([
+        Slider::query()->create([
             'link' => $request->link,
             'image_path' => $image_path
         ]);
@@ -67,7 +67,7 @@ class SliderController extends Controller
 
     public function delete($id)
     {
-        $slide = Slider::where('id', $id)->first();
+        $slide = Slider::query()->where('id', $id)->first();
         unlink($slide->image_path);
         $slide->delete();
         Session::add('message', 'slide deleted successfully');
@@ -76,7 +76,7 @@ class SliderController extends Controller
 
     public function activeSwitch($id): void
     {
-        $slide = Slider::where('id', $id)->first();
+        $slide = Slider::query()->where('id', $id)->first();
         $slide->update([
             'is_active' => 1 - $slide->is_active
         ]);

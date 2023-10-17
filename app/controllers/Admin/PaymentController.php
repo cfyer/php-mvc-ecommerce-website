@@ -15,7 +15,7 @@ class PaymentController extends Controller
     {
         Role::admin();
 
-        $this->count = Payment::count();
+        $this->count = Payment::query()->count();
     }
 
     public function index(): View

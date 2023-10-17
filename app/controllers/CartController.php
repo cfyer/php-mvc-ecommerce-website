@@ -32,7 +32,7 @@ class CartController extends Controller
     public function incQty()
     {
         $id = Request::get('post')->id;
-        $product = Product::where('id', $id)->first();
+        $product = Product::query()->where('id', $id)->first();
         if ($product['quantity'] <= $_SESSION['cart'][$id]['quantity']) {
             exit();
         }

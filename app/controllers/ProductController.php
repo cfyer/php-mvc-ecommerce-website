@@ -20,7 +20,7 @@ class ProductController extends Controller
 
         if (Request::has('get')) {
             $request = Request::get('get');
-            $products = Product::where('name', 'LIKE', '%' . $request->key . '%')->get();
+            $products = Product::query()->where('name', 'LIKE', '%' . $request->key . '%')->get();
         }
 
         return View::render()->blade('client.products.index', compact('products', 'links'));
@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function show($id): View
     {
-        $product = Product::where('id', $id)->first();
+        $product = Product::query()->where('id', $id)->first();
 
         $similarProducts = Product::query()->where('category_id', $product->category->id)->orderBy('id', 'DESC')->limit(4)->get();
 

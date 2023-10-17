@@ -19,7 +19,7 @@ class CSRFToken
     /**
      * @throws Exception
      */
-    public static function verify($request_token, $regenerate = true): true
+    public static function verify($request_token, $regenerate = true): bool
     {
         if (!Session::has('token') or Session::get('token') !== $request_token)
             return throw new Exception("CSRF token is not valid");

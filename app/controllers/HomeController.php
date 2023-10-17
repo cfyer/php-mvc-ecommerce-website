@@ -9,9 +9,9 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $products = Product::orderBy('id', 'DESC')->limit(4)->get();
+        $products = Product::query()->orderByDesc('id')->limit(4)->get();
 
-        $slides = Slider::orderBy('id', 'DESC')->limit(3)->get();
+        $slides = Slider::query()->orderByDesc('id')->limit(3)->get();
 
         return View::render()->blade('client.index', compact('products', 'slides'));
     }

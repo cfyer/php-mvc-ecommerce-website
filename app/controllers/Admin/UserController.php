@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->count = User::count();
+        $this->count = User::query()->count();
     }
 
     public function index(): View
@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function edit($id): View
     {
-        $user = User::where('id', $id)->first();
+        $user = User::query()->where('id', $id)->first();
 
         return View::render()->blade('admin.users.edit', compact('user'));
     }
@@ -45,7 +45,7 @@ class UserController extends Controller
             'role' => ['required' => true],
         ]);
 
-        $user = User::where('id', $id)->first();
+        $user = User::query()->where('id', $id)->first();
 
         $user->update([
             'fullname' => $request->fullname,
@@ -59,7 +59,7 @@ class UserController extends Controller
 
     public function delete($id): void
     {
-        $user = User::where('id', $id)->first();
+        $user = User::query()->where('id', $id)->first();
         $user->delete();
         Session::add('message', 'User deleted');
         redirect('/admin/users');

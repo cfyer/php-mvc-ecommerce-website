@@ -39,7 +39,7 @@ class CategoryController extends Controller
             'name' => ['unique' => 'categories', 'required' => true]
         ]);
 
-        Category::create(['name' => $request->name]);
+        Category::query()->create(['name' => $request->name]);
 
         Session::add('message', 'Category created successfully');
         redirect('/admin/categories');
@@ -47,7 +47,7 @@ class CategoryController extends Controller
 
     public function edit($id): View
     {
-        $category = Category::where('id', $id)->first();
+        $category = Category::query()->where('id', $id)->first();
 
         return View::render()->blade('admin.categories.edit', compact('category'));
     }
@@ -64,7 +64,7 @@ class CategoryController extends Controller
             'name' => ['required' => true],
         ]);
 
-        $category = Category::where('id', $id)->first();
+        $category = Category::query()->where('id', $id)->first();
 
         $category->update(['name' => $request->name,]);
 
@@ -74,7 +74,7 @@ class CategoryController extends Controller
 
     public function delete( $id): void
     {
-        Category::where('id', $id)->delete();
+        Category::query()->where('id', $id)->delete();
 
         Session::add('message', 'Category deleted successfully');
 

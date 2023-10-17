@@ -17,14 +17,14 @@ class PanelController extends Controller
 
     public function index(): View
     {
-        $user = User::where('id', Session::get('SESSION_USER_ID'))->first();
+        $user = User::find(Session::get('SESSION_USER_ID'));
 
         return View::render()->blade('user.panel.index', compact('user'));
     }
 
     public function edit($id): View
     {
-        $user = User::where('id', $id)->first();
+        $user = User::query()->whereId($id)->first();
 
         return View::render()->blade('user.panel.edit', compact('user'));
     }
@@ -44,7 +44,7 @@ class PanelController extends Controller
             'address' => ['required' => true],
         ]);
 
-        $user = User::where('id', $id)->first();
+        $user = User::query()->whereId($id)->first();
 
         $user->update([
             'username' => $request->username,
@@ -58,7 +58,7 @@ class PanelController extends Controller
 
     public function editPassword($id): View
     {
-        $user = User::where('id', $id)->first();
+        $user = User::query()->whereId($id)->first();
 
         return View::render()->blade('user.panel.password', compact('user'));
     }
@@ -73,15 +73,16 @@ class PanelController extends Controller
         CSRFToken::verify($request->csrf, false);
 
         RequestValidation::validate($request, [
-            'oldPassword' => ['required' => true, 'min' => 6],
-            'newPassword' => ['required' => true, 'min' => 6],
+            'oldPassword' => ['required' => true, 'minLen' => 4],
+            'newPassword' => ['required' => true, 'minLen' => 4],
         ]);
 
-        $user = User::where('id', $id)->first();
+        $user = User::query()->where('id', $id)->first();
 
         if (sha1($request->oldPassword) !== $user->password) {
             Session::add('invalids', ['old password incorrect']);
             redirect("/panel/{$id['id']}/edit/password");
+            return;
         }
 
         $user->update([
@@ -94,7 +95,7 @@ class PanelController extends Controller
 
     public function orders($userid): View
     {
-        $orders = Order::where('user_id', $userid)->get();
+        $orders = Order::query()->where('user_id', $userid)->where('status', 'paid')->get();
 
         return View::render()->blade('user.orders.index', compact('orders'));
     }

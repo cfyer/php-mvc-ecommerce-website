@@ -25,7 +25,7 @@ function env(): void
 {
 	copy('./.env.example', '.env');
 	tag('INFO');
-	echo CliColor::paint('env file created', 'green');
+	echo CliColor::paint(' env file created', 'green');
 }
 
 function clearViewsCache(): void
@@ -37,7 +37,7 @@ function clearViewsCache(): void
 	}
 
 	tag('INFO');
-	echo CliColor::paint('views cache cleared', 'green');
+	echo CliColor::paint(' views cache cleared', 'green');
 }
 
 function help(): void
@@ -61,5 +61,5 @@ function tag(string $text, string $bg = 'blue'): void
 
 function def(): void{
 	tag('ERROR', 'red');
-	echo CliColor::paint('Command not found', 'red', 'ul');
+	echo CliColor::paint(' Command not found', 'red', 'ul');
 }

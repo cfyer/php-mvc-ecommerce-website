@@ -14,6 +14,7 @@ class RequestValidation
         'email' => 'Email address is not valid',
         'unique' => 'That :attribute is already taken, please try another one',
         'required' => 'The :attribute field is required',
+        'minLen' => 'The :attribute must be at least :policy characters',
     ];
 
     public static function validate($request, $rules): void
@@ -79,6 +80,11 @@ class RequestValidation
             return $value >= $policy;
         }
 
+        return strlen($value) >= $policy;
+    }
+
+    protected static function minLen($field, $value, $policy): bool
+    {
         return strlen($value) >= $policy;
     }
 

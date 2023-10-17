@@ -17,14 +17,14 @@ class PaymentController extends Controller
         $this->checkUserLoggedIn();
         $this->checkCartIsNotEmpty();
 
-        $user = User::where('id', Session::get('SESSION_USER_ID'))->first();
+        $user = User::query()->where('id', Session::get('SESSION_USER_ID'))->first();
 
         try {
             $cart = Session::get('cart');
 
             $ref_code = base64_encode(openssl_random_pseudo_bytes(32));
 
-            $order = Order::create([
+            $order = Order::query()->create([
                 'user_id' => $user->id,
                 'total_price' => Cart::getTotalAmount(),
                 'status' => 'unpaid',
@@ -32,8 +32,9 @@ class PaymentController extends Controller
             ]);
 
             foreach ($cart as $item) {
-                $product = Product::where('id', $item['id'])->first();
-                OrderItem::create([
+                $product = Product::query()->where('id', $item['id'])->first();
+
+                OrderItem::query()->create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'unit_price' => $product->price,
@@ -42,7 +43,7 @@ class PaymentController extends Controller
                 ]);
             }
 
-            Payment::create([
+            Payment::query()->create([
                 'order_id' => $order->id,
                 'ref_id' => rand(1111, 9999),
                 'res_id' => rand(1111, 9999),
@@ -55,7 +56,7 @@ class PaymentController extends Controller
 
             return $paymentService->pay();
         } catch (Exception $e) {
-            die($e->getMessage());
+            die($e->getMessage() . ' : line' . $e->getLine());
         }
     }
 
@@ -88,13 +89,9 @@ class PaymentController extends Controller
             redirect('/cart');
         }
 
-        Order::where('id', $result['order_id'])->update([
-            'status' => 'paid'
-        ]);
+        Order::query()->where('id', $result['order_id'])->update(['status' => 'paid']);
 
-        Payment::where('order_id', $result['order_id'])->update([
-            'status' => 'paid'
-        ]);
+        Payment::query()->where('order_id', $result['order_id'])->update(['status' => 'paid']);
 
         foreach (Session::get('cart') as $item) {
             $this->decreaseQuantityAfterPayment($item);
@@ -107,7 +104,7 @@ class PaymentController extends Controller
 
     private function decreaseQuantityAfterPayment($item)
     {
-        $product = Product::where('id', $item['id'])->first();
+        $product = Product::query()->where('id', $item['id'])->first();
         $product->update([
             'quantity' => $product->quantity - $item['quantity']
         ]);
