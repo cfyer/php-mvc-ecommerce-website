@@ -1,8 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
     <div class="container-fluid">
-        <a href="/cart" class="btn btn-primary me-lg-2">
+
+        <a href="/cart" class="btn btn-sm btn-primary me-lg-2">
             <span class="icofont icofont-cart"></span>
         </a>
+
         <a class="navbar-brand" href="/">{{ $_ENV['APP_NAME'] }}</a>
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapsibleNavId">
@@ -16,7 +18,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">Products</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <div class="dropdown-menu border-0 shadow-sm" aria-labelledby="dropdownId">
                         @foreach (\App\Models\Category::all() as $category)
                             <a class="dropdown-item my-1" href="/categories/{{ $category->id }}/">
                                 <i class="icofont icofont-caret-right"></i>
@@ -29,27 +31,22 @@
                         </a>
                     </div>
                 </li>
-                @if (!is_auth())
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Account</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="/register">Register</a>
-                            <a class="dropdown-item" href="/login">Login</a>
-                        </div>
-                    </li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Account</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="/panel">Panel</a>
-                            <form action="logout/" method="POST">
-                                <input type="submit" value="logout" class="dropdown-item">
-                            </form>
-                        </div>
-                    </li>
-                @endif
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Account</a>
+                    <div class="dropdown-menu border-0 shadow-sm" aria-labelledby="dropdownId">
+                        @if (!is_auth())
+                        <a class="dropdown-item" href="/register">Register</a>
+                        <a class="dropdown-item" href="/login">Login</a>
+                        @else
+                        <a class="dropdown-item" href="/panel">Panel</a>
+                        <form action="logout/" method="POST">
+                            <input type="submit" value="logout" class="dropdown-item">
+                        </form>
+                        @endif
+                    </div>
+                </li>
             </ul>
 
             <form class="d-flex my-2 my-lg-0" action="/products" method="GET">

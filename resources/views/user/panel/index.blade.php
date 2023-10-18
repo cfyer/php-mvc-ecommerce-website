@@ -6,7 +6,7 @@
     <a href="/" class="btn btn-danger btn-sm m-2"><i class="icofont-exit"></i></a>
     <section class="profile container mt-5">
         <div class="row">
-            <div class="col-12 col-md-8 col-xl-6 bg-light rounded p-3 mx-auto">
+            <div class="col-12 col-md-8 col-xl-6 rounded p-3 mx-auto shadow">
                 @include('general.layouts.messages')
                 <div class="profile-header">
                     <h4 class="text-center">{{ \App\Core\Session::get('SESSION_USER_NAME') }}</h4>
