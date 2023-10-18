@@ -1,5 +1,5 @@
 <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-    <div class="card mb-4">
+    <div class="card product-card border-0 mb-4">
         <img class="card-img-top" src="/{{ $product->image_path }}" alt="product">
         <div class="card-body">
             <h4 class="card-title">
@@ -7,18 +7,8 @@
             </h4>
             <p class="card-text">$ {{ $product->price }}</p>
         </div>
-        <div class="card-footer d-flex">
-            <a href="/products/{{ $product->id }}" class="btn btn-primary btn-sm">See More</a>
-            @if ($product->quantity > 0)
-            <button class="btn btn-success btn-sm mx-2 addCart" data-productId="{{ $product->id }}">
-                Add to Cart
-            </button>
-            @else
-            <button class="btn btn-danger btn-sm mx-2 addCart" disabled>
-                Ended
-            </button>
-            @endif
-            <input type="hidden" name="quantity" id="quantity" value="1">
+        <div class="card-footer border-0 d-flex">
+            <a href="/products/{{ $product->id }}" class="btn mx-auto btn-sm">See Details</a>
         </div>
     </div>
 </div>

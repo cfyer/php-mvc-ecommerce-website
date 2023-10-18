@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-12 col-md-5">
-                <img src="/{{ $product->image_path }}" alt="{{ $product->name }}" class="img-fluid rounded">
+                <img src="/{{ $product->image_path }}" alt="{{ $product->name }}" class="img-fluid product-img">
             </div>
 
             <div class="col-12 col-md-5">

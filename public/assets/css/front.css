@@ -2,6 +2,10 @@ a {
     text-decoration: none;
 }
 
+input:focus{
+    box-shadow: none !important;
+}
+
 .pagination {
     text-align: center !important;
 }
@@ -29,4 +33,18 @@ a {
 
 .slide{
     max-height: 40vh;
+}
+
+.btn:focus{
+    box-shadow: none !important;
+}
+
+.product-card{
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+}
+
+.product-img{
+    border-radius: 25px;
 }

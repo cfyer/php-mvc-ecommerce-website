@@ -36,7 +36,7 @@ function is_auth(): bool
 function user()
 {
     if (is_auth()) {
-        return User::where('id', Session::get('SESSION_USER_ID'))->first();
+        return User::query()->where('id', Session::get('SESSION_USER_ID'))->first();
     }
     return false;
 }

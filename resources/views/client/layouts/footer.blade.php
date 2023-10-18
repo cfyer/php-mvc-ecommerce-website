@@ -1,11 +1,11 @@
-<footer class="p-3 bg-info">
+<footer class="p-3 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-6">
                 <strong>New Products</strong>
                 <ul class="mt-2">
                     @foreach (\App\Models\Product::footerProducts()->get() as $product)
-                        <li>
+                        <li class="my-2">
                             <a href="/products/{{ $product->id }}/" class="text-black">{{ $product->name }}</a>
                         </li>
                     @endforeach
@@ -14,18 +14,18 @@
             <div class="col-12 col-sm-6">
                 <strong>Useful links</strong>
                 <ul class="mt-2">
-                    <li>
+                    <li class="my-2">
                         <a href="/" class="text-black">Home</a>
                     </li>
-                    <li>
+                    <li class="my-2">
                         <a href="/register" class="text-black">Register</a> / <a href="/login"
                             class="text-black">Login</a>
                     </li>
-                    <li>
+                    <li class="my-2">
                         <a href="/products/" class="text-black">Products</a>
                     </li>
-                    <li>
-                        <a href="https://github.com/hamidrezasfy/php-mvc-ecommerce-website/"
+                    <li class="my-2">
+                        <a href="https://github.com/cfyer/php-mvc-ecommerce-website/"
                             class="text-black">Github Repository</a>
                     </li>
                 </ul>
